@@ -13,7 +13,6 @@ func QuickSort(list common.List, comparator common.Comparator) {
 func QuickSortConcurrent(list common.List, comparator common.Comparator) {
 	wg := &sync.WaitGroup{}
 	quickSortConcurrent(list, 0, list.Length()-1, comparator, wg)
-	wg.Add(-1)
 	wg.Wait()
 }
 
@@ -27,18 +26,19 @@ func quickSort(list common.List, low, high int, comparator common.Comparator) {
 }
 
 func quickSortConcurrent(list common.List, low, high int, comparator common.Comparator, wg *sync.WaitGroup) {
-	wg.Add(1)
 	if low >= high {
 		return
 	}
 	mid := partition(list, low, high, comparator)
+
+	wg.Add(2)
 	go func() {
 		quickSortConcurrent(list, low, mid-1, comparator, wg)
-		wg.Add(-1)
+		wg.Done()
 	}()
 	go func() {
 		quickSortConcurrent(list, mid+1, high, comparator, wg)
-		wg.Add(-1)
+		wg.Done()
 	}()
 }
 
@@ -64,8 +64,8 @@ func partition(list common.List, low, high int, comparator common.Comparator) (m
 		if i >= j {
 			break
 		}
-		exch(list, i, j)
+		exchange(list, i, j)
 	}
-	exch(list, low, j)
+	exchange(list, low, j)
 	return j
 }

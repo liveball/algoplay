@@ -7,7 +7,7 @@ import (
 	"github.com/algoplay/common"
 )
 
-func exch(list common.List, i, j int) {
+func exchange(list common.List, i, j int) {
 	old := list.Get(i)
 	list.Set(i, list.Get(j))
 	list.Set(j, old)
