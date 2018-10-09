@@ -11,9 +11,9 @@ func TestQuickSort(t *testing.T) {
 		list       common.List
 		comparator common.Comparator
 	}
-	list1 := common.SliceToSimpleList(randomIntGenerator(10))
+	list1 := common.SliceToSimpleList(randomIntGenerator(100000,200000))
 	comparator1 := func(i, j int) bool {
-		return list1.Get(i).(int) < list1.Get(j).(int)
+		return list1.Get(i).(int) <= list1.Get(j).(int)
 	}
 	tests := []struct {
 		name string
@@ -43,9 +43,9 @@ func TestQuickSortConcurrent(t *testing.T) {
 		list       common.List
 		comparator common.Comparator
 	}
-	list1 := common.SliceToSimpleList(randomIntGenerator(100000))
+	list1 := common.SliceToSimpleList(randomIntGenerator(100000,200000))
 	comparator1 := func(i, j int) bool {
-		return list1.Get(i).(int) < list1.Get(j).(int)
+		return list1.Get(i).(int) <= list1.Get(j).(int)
 	}
 	tests := []struct {
 		name string
