@@ -7,7 +7,7 @@ type List interface {
 	Set(index int, elem Any)
 	Slice(begin, end int) List
 	Length() int
-	Append(elem Any) List
+	Append(elems... Any) List
 	ToSlice() []Any
 }
 
