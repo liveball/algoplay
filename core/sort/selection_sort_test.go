@@ -1,7 +1,7 @@
 package sort
 
 import (
-	"algoplay/core"
+	"github.com/liveball/algoplay/core"
 	"fmt"
 	"testing"
 )

@@ -3,7 +3,7 @@ package sort
 import (
 	"testing"
 
-	"github.com/liveball/algoplay/common"
+	"../../common"
 )
 
 func TestQuickSort(t *testing.T) {
@@ -11,7 +11,7 @@ func TestQuickSort(t *testing.T) {
 		list       common.List
 		comparator common.Comparator
 	}
-	list1 := common.SliceToSimpleList(randomIntGenerator(100000,200000))
+	list1 := common.SliceToSimpleList(randomIntGenerator(200000,200000))
 	comparator1 := func(i, j int) bool {
 		return list1.Get(i).(int) <= list1.Get(j).(int)
 	}

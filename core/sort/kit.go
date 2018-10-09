@@ -1,7 +1,7 @@
 package sort
 
 import (
-	"github.com/liveball/algoplay/common"
+	"../../common"
 	"math/rand"
 	"time"
 )
