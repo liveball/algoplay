@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"testing"
 
-	"algoplay/core"
+	"github.com/algoplay/core"
 )
 
 func TestSelectionSort(t *testing.T) {

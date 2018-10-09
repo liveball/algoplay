@@ -3,7 +3,7 @@ package sort
 import (
 	"testing"
 
-	"algoplay/common"
+	"github.com/algoplay/common"
 )
 
 func Test_judgeSorted(t *testing.T) {

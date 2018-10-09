@@ -4,7 +4,7 @@ import (
 	"math/rand"
 	"time"
 
-	"algoplay/common"
+	"github.com/algoplay/common"
 )
 
 func exch(list common.List, i, j int) {

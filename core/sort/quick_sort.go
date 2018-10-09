@@ -3,7 +3,7 @@ package sort
 import (
 	"sync"
 
-	"algoplay/common"
+	"github.com/algoplay/common"
 )
 
 func QuickSort(list common.List, comparator common.Comparator) {
