@@ -1,9 +1,10 @@
 package sort
 
 import (
-	"../../core"
 	"fmt"
 	"testing"
+
+	"algoplay/core"
 )
 
 func TestSelectionSort(t *testing.T) {

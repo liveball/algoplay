@@ -1,9 +1,10 @@
 package sort
 
 import (
-	"../../common"
 	"math/rand"
 	"time"
+
+	"algoplay/common"
 )
 
 func exch(list common.List, i, j int) {

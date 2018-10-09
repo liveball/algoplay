@@ -1,8 +1,9 @@
 package sort
 
 import (
-	"../../common"
 	"sync"
+
+	"algoplay/common"
 )
 
 func QuickSort(list common.List, comparator common.Comparator) {
