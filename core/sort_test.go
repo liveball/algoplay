@@ -3,13 +3,15 @@ package core
 import (
 	"fmt"
 	"testing"
+
+	"algoplay/tools"
 )
 
 func TestBubbleSort(t *testing.T) {
 	//test int type
 	ints := &In{}
-	for i := 0; i < 10; i++ {
-		ints.Add(i)
+	for _, v := range tools.New().Numbers(0, 99, 30) {
+		ints.Add(v)
 	}
 
 	fmt.Println(ints.Get()) //before sort
@@ -26,4 +28,25 @@ func TestBubbleSort(t *testing.T) {
 	BubbleSort(strs.Get())
 	fmt.Println(strs.Get()) //after sort
 
+}
+
+func TestSelectionSort(t *testing.T) {
+	//test int type
+	ints := &In{}
+	for _, v := range tools.New().Numbers(0, 99, 30) {
+		ints.Add(v)
+	}
+	fmt.Println(ints.Get()) //before sort
+	SelectionSort(ints.Get())
+	fmt.Println(ints.Get()) //after sort
+
+	//test string type
+	strs := &In{}
+	for _, v := range tools.New().Strings() {
+		strs.Add(v)
+	}
+
+	fmt.Println(strs.Get()) //before sort
+	SelectionSort(strs.Get())
+	fmt.Println(strs.Get()) //after sort
 }
