@@ -1,5 +1,14 @@
 package common
 
+import (
+	"fmt"
+	"reflect"
+)
+
+var (
+	IsNotSliceError = fmt.Errorf("The type of value is not slice. ")
+)
+
 type Any = interface{}
 
 type List interface {
@@ -7,7 +16,7 @@ type List interface {
 	Set(index int, elem Any)
 	Slice(begin, end int) List
 	Length() int
-	Append(elems... Any) List
+	Append(elems ... Any) List
 	ToSlice() []Any
 }
 
@@ -15,8 +24,16 @@ type SimpleList struct {
 	list []Any
 }
 
-func FromSlice(slc []Any) *SimpleList {
-	return &SimpleList{list: slc}
+func SliceToSimpleList(slc Any) *SimpleList {
+	if reflect.TypeOf(slc).Kind() != reflect.Slice {
+		panic(IsNotSliceError)
+	}
+	v := reflect.ValueOf(slc)
+	list := make([]Any, v.Len())
+	for i := 0; i < v.Len(); i++ {
+		list[i] = v.Index(i).Interface()
+	}
+	return &SimpleList{list}
 }
 
 func (l *SimpleList) Get(index int) Any {
@@ -37,7 +54,7 @@ func (l *SimpleList) Length() int {
 	return len(l.list)
 }
 
-func (l *SimpleList) Append(elems... Any) List {
+func (l *SimpleList) Append(elems ... Any) List {
 	l.list = append(l.list, elems...)
 	return l
 }
