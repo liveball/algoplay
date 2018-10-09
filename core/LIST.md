@@ -9,3 +9,4 @@
  >>1.8  计数排序（Counting Sort）    
  >>1.9  桶排序（Bucket Sort）   
  >>1.10 基数排序（Radix Sort）   
+ >>1.11 快速排序（Quick Sort）
