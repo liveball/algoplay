@@ -37,8 +37,8 @@ func (l *SimpleList) Length() int {
 	return len(l.list)
 }
 
-func (l *SimpleList) Append(elem Any) List {
-	l.list = append(l.list, elem)
+func (l *SimpleList) Append(elems... Any) List {
+	l.list = append(l.list, elems...)
 	return l
 }
 
