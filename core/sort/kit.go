@@ -13,7 +13,7 @@ func exchange(list common.List, i, j int) {
 	list.Set(j, old)
 }
 
-func judgeSorted(list common.List, comp common.Comparator) bool {
+func isSorted(list common.List, comp common.Comparator) bool {
 	for i := 0; i < list.Length()-1; i++ {
 		if !comp(i, i+1) {
 			return false

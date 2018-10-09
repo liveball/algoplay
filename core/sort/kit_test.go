@@ -6,7 +6,7 @@ import (
 	"github.com/algoplay/common"
 )
 
-func Test_judgeSorted(t *testing.T) {
+func TestIsSorted(t *testing.T) {
 	type args struct {
 		list common.List
 		comp common.Comparator
@@ -20,8 +20,8 @@ func Test_judgeSorted(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := judgeSorted(tt.args.list, tt.args.comp); got != tt.want {
-				t.Errorf("judgeSorted() = %v, want %v", got, tt.want)
+			if got := isSorted(tt.args.list, tt.args.comp); got != tt.want {
+				t.Errorf("isSorted() = %v, want %v", got, tt.want)
 			}
 		})
 	}

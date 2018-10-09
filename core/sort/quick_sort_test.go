@@ -47,7 +47,7 @@ func TestQuickSort(t *testing.T) {
 
 			fmt.Println("after :", tt.args.list)
 
-			if !judgeSorted(list1, comparator1) {
+			if !isSorted(list1, comparator1) {
 				t.Fail()
 			}
 		})
@@ -80,7 +80,7 @@ func TestQuickSortConcurrent(t *testing.T) {
 			fmt.Println("before :", tt.args.list)
 
 			QuickSortConcurrent(tt.args.list, tt.args.comparator)
-			if !judgeSorted(list1, comparator1) {
+			if !isSorted(list1, comparator1) {
 				t.Fail()
 			}
 
