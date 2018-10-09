@@ -4,11 +4,11 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/algoplay/core"
+	"github.com/algoplay/tools"
 )
 
 func TestSelectionSort(t *testing.T) {
-	ints := &core.In{}
+	ints := &tools.In{}
 	for i := 0; i < 10; i++ {
 		ints.Add(i)
 	}

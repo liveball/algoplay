@@ -1,4 +1,4 @@
-package core
+package sort
 
 //BubbleSort for bubble sort
 func BubbleSort(data interface{}) {
@@ -31,7 +31,7 @@ func BubbleSort(data interface{}) {
 	}
 }
 
-func SelectionSort(data interface{}) {
+func SelectionSort2(data interface{}) {
 	d := data.([]interface{})
 	for i := 0; i < len(d)-1; i++ {
 		min := i

@@ -1,4 +1,4 @@
-package core
+package tools
 
 //Data is an interface for test sort.
 type Data interface {
