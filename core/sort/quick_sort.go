@@ -1,18 +1,44 @@
 package sort
 
-import "github.com/liveball/algoplay/common"
+import (
+	"github.com/liveball/algoplay/common"
+	"sync"
+)
 
 func QuickSort(list common.List, comparator common.Comparator) {
 	quickSort(list, 0, list.Length()-1, comparator)
 }
 
+func QuickSortConcurrent(list common.List, comparator common.Comparator) {
+	wg := &sync.WaitGroup{}
+	quickSortConcurrent(list, 0, list.Length()-1, comparator, wg)
+	wg.Add(-1)
+	wg.Wait()
+}
+
 func quickSort(list common.List, low, high int, comparator common.Comparator) {
-	if low+1 >= high {
+	if low >= high {
 		return
 	}
 	mid := partition(list, low, high, comparator)
 	quickSort(list, low, mid-1, comparator)
 	quickSort(list, mid+1, high, comparator)
+}
+
+func quickSortConcurrent(list common.List, low, high int, comparator common.Comparator, wg *sync.WaitGroup) {
+	wg.Add(1)
+	if low >= high {
+		return
+	}
+	mid := partition(list, low, high, comparator)
+	go func() {
+		quickSortConcurrent(list, low, mid-1, comparator, wg)
+		wg.Add(-1)
+	}()
+	go func() {
+		quickSortConcurrent(list, mid+1, high, comparator, wg)
+		wg.Add(-1)
+	}()
 }
 
 func partition(list common.List, low, high int, comparator common.Comparator) (mid int) {
