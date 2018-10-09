@@ -1,8 +1,9 @@
 package sort
 
 import (
-	"github.com/liveball/algoplay/common"
+	"../../common"
 	"math/rand"
+	"time"
 )
 
 func exch(list common.List, i, j int) {
@@ -20,10 +21,11 @@ func judgeSorted(list common.List, comp common.Comparator) bool {
 	return true
 }
 
-func randomIntGenerator(count int) []int {
+func randomIntGenerator(count int, max int) []int {
+	rand.Seed(time.Now().Unix())
 	res := make([]int, count)
 	for i := 0; i < count; i++ {
-		res[i] = int(rand.Uint32())
+		res[i] = int(rand.Float32() * float32(max))
 	}
 	return res
 }

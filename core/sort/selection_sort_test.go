@@ -1,7 +1,7 @@
 package sort
 
 import (
-	"algoplay/core"
+	"../../core"
 	"fmt"
 	"testing"
 )
