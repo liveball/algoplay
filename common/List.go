@@ -15,6 +15,10 @@ type SimpleList struct {
 	list []Any
 }
 
+func FromSlice(slc []Any) *SimpleList {
+	return &SimpleList{list: slc}
+}
+
 func (l *SimpleList) Get(index int) Any {
 	return l.list[index]
 }
