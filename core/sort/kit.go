@@ -4,7 +4,7 @@ import (
 	"math/rand"
 	"time"
 
-	"github.com/algoplay/common"
+	"github.com/liveball/algoplay/common"
 )
 
 func exchange(list common.List, i, j int) {

@@ -3,8 +3,10 @@ package sort
 import (
 	"sync"
 
-	"github.com/algoplay/common"
+	"github.com/liveball/algoplay/common"
 )
+
+var pool *common.Pool
 
 func QuickSort(list common.List, comparator common.Comparator) {
 	quickSort(list, 0, list.Length()-1, comparator)
@@ -32,14 +34,14 @@ func quickSortConcurrent(list common.List, low, high int, comparator common.Comp
 	mid := partition(list, low, high, comparator)
 
 	wg.Add(2)
-	go func() {
+	pool.Go(func() {
 		quickSortConcurrent(list, low, mid-1, comparator, wg)
 		wg.Done()
-	}()
-	go func() {
+	})
+	pool.Go(func() {
 		quickSortConcurrent(list, mid+1, high, comparator, wg)
 		wg.Done()
-	}()
+	})
 }
 
 func partition(list common.List, low, high int, comparator common.Comparator) (mid int) {
@@ -68,4 +70,8 @@ func partition(list common.List, low, high int, comparator common.Comparator) (m
 	}
 	exchange(list, low, j)
 	return j
+}
+
+func init() {
+	pool = common.NewPool(-1)
 }

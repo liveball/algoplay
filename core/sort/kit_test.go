@@ -3,7 +3,7 @@ package sort
 import (
 	"testing"
 
-	"github.com/algoplay/common"
+	"github.com/liveball/algoplay/common"
 )
 
 func TestIsSorted(t *testing.T) {

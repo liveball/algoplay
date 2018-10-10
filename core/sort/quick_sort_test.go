@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/algoplay/common"
-	"github.com/algoplay/tools"
+	"github.com/liveball/algoplay/common"
+	"github.com/liveball/algoplay/tools"
 )
 
 type args struct {
