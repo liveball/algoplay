@@ -6,7 +6,7 @@ import (
 	"github.com/liveball/algoplay/common"
 )
 
-var pool = common.New(-1)
+var pool = common.New(100)
 
 //QuickSort serial quick sort
 func QuickSort(list common.List, comparator common.Comparator) {
@@ -30,21 +30,27 @@ func quickSort(list common.List, low, high int, comparator common.Comparator) {
 }
 
 func quickSortConcurrent(list common.List, low, high int, comparator common.Comparator, wg *sync.WaitGroup) {
-	//fmt.Printf("quickSortConcurrent\n\tlist = %s, low = %d, high = %d\n", listToString(list), low, high)
 	if low >= high {
 		return
 	}
 	mid := partition(list, low, high, comparator)
-	//fmt.Printf("\n\tpartition\n\tlist = %s, low = %d, mid = %d, high = %d\n", listToString(list), low, mid, high)
 	wg.Add(2)
-	pool.Go(func() {
+	// pool.Go(func() {
+	// 	quickSortConcurrent(list, low, mid-1, comparator, wg)
+	// 	wg.Done()
+	// })
+	go func() {
 		quickSortConcurrent(list, low, mid-1, comparator, wg)
 		wg.Done()
-	})
-	pool.Go(func() {
+	}()
+	// pool.Go(func() {
+	// 	quickSortConcurrent(list, mid+1, high, comparator, wg)
+	// 	wg.Done()
+	// })
+	go func() {
 		quickSortConcurrent(list, mid+1, high, comparator, wg)
 		wg.Done()
-	})
+	}()
 }
 
 func partition(list common.List, low, high int, comparator common.Comparator) (mid int) {
