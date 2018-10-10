@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"runtime"
 
 	"github.com/liveball/algoplay/common"
@@ -50,7 +51,7 @@ func testQuickSort() {
 		// sort.QuickSort(tt.args.list, tt.args.comparator)
 		sort.QuickSortConcurrent(tt.args.list, tt.args.comparator)
 
-		// fmt.Println("after :", tt.args.list)
+		fmt.Println("after :", tt.args.list)
 
 	}
 }

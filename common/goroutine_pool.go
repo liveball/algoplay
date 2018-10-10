@@ -22,6 +22,8 @@ func New(numGoroutines int) *Pool {
 		numGoroutines = runtime.NumCPU()
 	}
 
+	runtime.GOMAXPROCS(numGoroutines) //set P num P<=2 有序 P>2 无序
+
 	p := Pool{
 		count:   numGoroutines,
 		recv:    make(chan Actor, numGoroutines),

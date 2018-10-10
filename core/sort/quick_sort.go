@@ -6,7 +6,7 @@ import (
 	"github.com/liveball/algoplay/common"
 )
 
-var pool = common.New(-1)
+var pool = common.New(2)
 
 //QuickSort serial quick sort
 func QuickSort(list common.List, comparator common.Comparator) {
