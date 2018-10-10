@@ -40,7 +40,7 @@ func quickSortConcurrent(list common.List, low, high int, comparator common.Comp
 	}
 	mid := partition(list, low, high, comparator)
 
-	wg.Add(2)
+	// wg.Add(2)
 	// go func() {
 	// 	quickSortConcurrent(list, low, mid-1, comparator, wg)
 	// 	wg.Done()
@@ -50,18 +50,13 @@ func quickSortConcurrent(list common.List, low, high int, comparator common.Comp
 	// 	wg.Done()
 	// }()
 
-	go func() {
-		pool.Go(func() {
-			quickSortConcurrent(list, low, mid-1, comparator, wg)
-		})
-		wg.Done()
-	}()
-	go func() {
-		pool.Go(func() {
-			quickSortConcurrent(list, mid+1, high, comparator, wg)
-		})
-		wg.Done()
-	}()
+	pool.Go(func() {
+		quickSortConcurrent(list, low, mid-1, comparator, wg)
+	})
+
+	pool.Go(func() {
+		quickSortConcurrent(list, mid+1, high, comparator, wg)
+	})
 }
 
 func partition(list common.List, low, high int, comparator common.Comparator) (mid int) {
