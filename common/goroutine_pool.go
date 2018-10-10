@@ -8,6 +8,7 @@ import (
 // Actor is executable function
 type Actor = func()
 
+// Pool is groutine pool
 type Pool struct {
 	count int            // goroutine count
 	recv  chan Actor     // receive actor
