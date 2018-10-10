@@ -73,5 +73,5 @@ func partition(list common.List, low, high int, comparator common.Comparator) (m
 }
 
 func init() {
-	pool = common.NewPool(-1)
+	pool = common.NewPool(1)
 }
