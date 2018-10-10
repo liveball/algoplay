@@ -10,9 +10,10 @@ type Actor = func()
 
 // Pool is groutine pool
 type Pool struct {
-	count int            // goroutine count
-	recv  chan Actor     // receive actor
-	wg    sync.WaitGroup // to wait all goroutine complete
+	count   int            // goroutine count
+	recv    chan Actor     // receive actor
+	chLimit chan bool      //limit chan buffer
+	wg      sync.WaitGroup // to wait all goroutine complete
 }
 
 //New for pool instance
@@ -23,8 +24,9 @@ func New(count int) *Pool {
 
 	recv := make(chan Actor, count)
 	p := Pool{
-		count: count,
-		recv:  recv,
+		count:   count,
+		recv:    recv,
+		chLimit: make(chan bool, 1),
 	}
 
 	p.wg.Add(count)
@@ -32,6 +34,7 @@ func New(count int) *Pool {
 		go func() {
 			for actor := range p.recv {
 				actor()
+				p.chLimit <- true
 			}
 			p.wg.Done()
 		}()
@@ -43,6 +46,7 @@ func New(count int) *Pool {
 //Go send func to chan.
 func (p *Pool) Go(actor Actor) {
 	p.recv <- actor
+	<-p.chLimit
 }
 
 //Close close recv chan

@@ -57,7 +57,7 @@ func TestQuickSort(t *testing.T) {
 func TestQuickSortConcurrent(t *testing.T) {
 
 	// list1 := common.SliceToSimpleList(randomIntGenerator(100000, 200000))
-	list1 := common.SliceToSimpleList(tools.New().Numbers(0, 99, 10))
+	list1 := common.SliceToSimpleList(tools.New().Numbers(0, 200000, 100000))
 
 	comparator1 := func(i, j int) bool {
 		return list1.Get(i).(int) <= list1.Get(j).(int)
