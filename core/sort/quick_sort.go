@@ -17,7 +17,6 @@ func QuickSort(list common.List, comparator common.Comparator) {
 func QuickSortConcurrent(list common.List, comparator common.Comparator) {
 	wg := &sync.WaitGroup{}
 	quickSortConcurrent(list, 0, list.Length()-1, comparator, wg)
-	wg.Wait()
 }
 
 func quickSort(list common.List, low, high int, comparator common.Comparator) {

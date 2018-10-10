@@ -12,13 +12,14 @@ type Actor = func()
 type Pool struct {
 	count   int            // goroutine count
 	recv    chan Actor     // receive actor
-	chLimit chan bool      //limit chan buffer
+	chLimit chan struct{}  //limit chan buffer
 	wg      sync.WaitGroup // to wait all goroutine complete
 }
 
 //New for pool instance
 func New(count int) *Pool {
 	if count <= 0 {
+		// runtime.GOMAXPROCS(1)
 		count = runtime.NumCPU()
 	}
 
@@ -26,15 +27,15 @@ func New(count int) *Pool {
 	p := Pool{
 		count:   count,
 		recv:    recv,
-		chLimit: make(chan bool, 1),
+		chLimit: make(chan struct{}, 1),
 	}
 
 	p.wg.Add(count)
 	for i := 0; i < count; i++ {
 		go func() {
 			for actor := range p.recv {
+				p.chLimit <- struct{}{}
 				actor()
-				p.chLimit <- true
 			}
 			p.wg.Done()
 		}()

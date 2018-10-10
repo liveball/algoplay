@@ -77,14 +77,14 @@ func TestQuickSortConcurrent(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			fmt.Println("before :", tt.args.list)
+			// fmt.Println("before :", tt.args.list)
 
 			QuickSortConcurrent(tt.args.list, tt.args.comparator)
 			if !isSorted(list1, comparator1) {
 				t.Fail()
 			}
 
-			fmt.Println("after :", tt.args.list)
+			// fmt.Println("after :", tt.args.list)
 
 		})
 	}

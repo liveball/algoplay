@@ -25,7 +25,7 @@ func main() {
 	wg.Wait()
 	pool.Close() //让工作池停止工作， 等待所有现有的工作完成
 
-	testQuickSortConcurrent()
+	testQuickSort()
 	// time.Sleep(1 * time.Minute)
 }
 
@@ -34,8 +34,7 @@ type args struct {
 	comparator common.Comparator
 }
 
-func testQuickSortConcurrent() {
-
+func testQuickSort() {
 	// list1 := common.SliceToSimpleList(randomIntGenerator(100000, 200000))
 	list1 := common.SliceToSimpleList(tools.New().Numbers(0, 200000, 100000))
 
@@ -58,6 +57,7 @@ func testQuickSortConcurrent() {
 	for _, tt := range tests {
 		fmt.Println("before :", tt.args.list)
 
+		// sort.QuickSort(tt.args.list, tt.args.comparator)
 		sort.QuickSortConcurrent(tt.args.list, tt.args.comparator)
 
 		fmt.Println("after :", tt.args.list)
