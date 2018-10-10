@@ -42,7 +42,7 @@ func New(count int) *Pool {
 
 //Go send func to chan.
 func (p *Pool) Go(actor Actor) {
-	p.recv <- actor
+	go func() { p.recv <- actor }()
 }
 
 //Close close recv chan

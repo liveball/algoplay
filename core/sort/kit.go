@@ -1,7 +1,9 @@
 package sort
 
 import (
+	"fmt"
 	"math/rand"
+	"strings"
 	"time"
 
 	"github.com/liveball/algoplay/common"
@@ -29,4 +31,14 @@ func randomIntGenerator(count int, max int) []int {
 		res[i] = int(rand.Float32() * float32(max))
 	}
 	return res
+}
+
+func listToString(list common.List) string {
+	builder := &strings.Builder{}
+	builder.WriteString("[ ")
+	for i, v := range list.ToSlice() {
+		builder.WriteString(fmt.Sprintf("%d: %v, ", i, v))
+	}
+	builder.WriteString(" ]")
+	return builder.String()
 }

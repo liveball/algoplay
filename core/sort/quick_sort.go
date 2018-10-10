@@ -30,11 +30,12 @@ func quickSort(list common.List, low, high int, comparator common.Comparator) {
 }
 
 func quickSortConcurrent(list common.List, low, high int, comparator common.Comparator, wg *sync.WaitGroup) {
+	//fmt.Printf("quickSortConcurrent\n\tlist = %s, low = %d, high = %d\n", listToString(list), low, high)
 	if low >= high {
 		return
 	}
 	mid := partition(list, low, high, comparator)
-
+	//fmt.Printf("\n\tpartition\n\tlist = %s, low = %d, mid = %d, high = %d\n", listToString(list), low, mid, high)
 	wg.Add(2)
 	pool.Go(func() {
 		quickSortConcurrent(list, low, mid-1, comparator, wg)
@@ -73,3 +74,4 @@ func partition(list common.List, low, high int, comparator common.Comparator) (m
 	exchange(list, low, j)
 	return j
 }
+
