@@ -17,28 +17,34 @@ type Pool struct {
 }
 
 //New for pool instance
-func New(count int) *Pool {
-	if count <= 0 {
-		// runtime.GOMAXPROCS(1)
-		count = runtime.NumCPU()
+func New(numGoroutines int) *Pool {
+	if numGoroutines < 1 {
+		numGoroutines = runtime.NumCPU()
 	}
 
-	recv := make(chan Actor, count)
+	runtime.GOMAXPROCS(numGoroutines) //set P num P<=2 有序 P>2 无序
+
 	p := Pool{
-		count:   count,
-		recv:    recv,
+		count:   numGoroutines,
+		recv:    make(chan Actor, numGoroutines),
 		chLimit: make(chan struct{}, 1),
 	}
 
-	p.wg.Add(count)
-	for i := 0; i < count; i++ {
-		go func() {
-			for actor := range p.recv {
-				p.chLimit <- struct{}{}
-				actor()
-			}
-			p.wg.Done()
-		}()
+	fn := func() {
+		for actor := range p.recv {
+			p.chLimit <- struct{}{}
+			actor()
+		}
+		p.wg.Done()
+	}
+
+	p.wg.Add(numGoroutines)
+	if numGoroutines == 1 {
+		go fn()
+	} else {
+		for i := 0; i < numGoroutines; i++ {
+			go fn()
+		}
 	}
 
 	return &p
@@ -46,8 +52,10 @@ func New(count int) *Pool {
 
 //Go send func to chan.
 func (p *Pool) Go(actor Actor) {
-	p.recv <- actor
-	<-p.chLimit
+	go func() {
+		p.recv <- actor
+		<-p.chLimit
+	}()
 }
 
 //Close close recv chan

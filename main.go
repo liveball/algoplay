@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"sync"
+	"runtime"
 
 	"github.com/liveball/algoplay/common"
 	"github.com/liveball/algoplay/core/sort"
@@ -13,20 +13,11 @@ import (
 //go build -o main main.go && GODEBUG=schedtrace=1000,scheddetail=1 ./main
 
 func main() {
-
-	pool := common.New(2)
-
-	var wg sync.WaitGroup
-	wg.Add(1)
-	pool.Go(func() {
-		fmt.Println("hello alg")
-		wg.Done()
-	})
-	wg.Wait()
-	pool.Close() //让工作池停止工作， 等待所有现有的工作完成
+	println("start NumGoroutine:", runtime.NumGoroutine())
 
 	testQuickSort()
-	// time.Sleep(1 * time.Minute)
+	sort.Close()
+	println("end NumGoroutine:", runtime.NumGoroutine())
 }
 
 type args struct {
@@ -35,7 +26,7 @@ type args struct {
 }
 
 func testQuickSort() {
-	// list1 := common.SliceToSimpleList(randomIntGenerator(100000, 200000))
+	// list1 := common.SliceToSimpleList(tools.New().Numbers(0, 20, 20))
 	list1 := common.SliceToSimpleList(tools.New().Numbers(0, 200000, 100000))
 
 	comparator1 := func(i, j int) bool {
@@ -55,7 +46,7 @@ func testQuickSort() {
 	}
 
 	for _, tt := range tests {
-		fmt.Println("before :", tt.args.list)
+		// fmt.Println("before :", tt.args.list)
 
 		// sort.QuickSort(tt.args.list, tt.args.comparator)
 		sort.QuickSortConcurrent(tt.args.list, tt.args.comparator)
