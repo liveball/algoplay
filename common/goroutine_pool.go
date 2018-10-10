@@ -9,65 +9,43 @@ import (
 type Actor = func()
 
 type Pool struct {
-	count    int             // goroutine count
-	channels []chan Actor    //
-	recv     chan Actor      // receive actor
-	wg       *sync.WaitGroup // to wait all goroutine complete
+	count int            // goroutine count
+	recv  chan Actor     // receive actor
+	wg    sync.WaitGroup // to wait all goroutine complete
 }
 
-func NewPool(count int) *Pool {
+//New for pool instance
+func New(count int) *Pool {
 	if count <= 0 {
 		count = runtime.NumCPU()
 	}
+
 	recv := make(chan Actor, count)
-	pool := &Pool{
-		count:    count,
-		channels: []chan Actor{},
-		recv:     recv,
-		wg:       &sync.WaitGroup{},
+	p := Pool{
+		count: count,
+		recv:  recv,
 	}
-	pool.wg.Add(count)
+
+	p.wg.Add(count)
 	for i := 0; i < count; i++ {
-		ch := make(chan Actor)
 		go func() {
-			for actor := range ch {
+			for actor := range p.recv {
 				actor()
 			}
-			pool.wg.Done()
+			p.wg.Done()
 		}()
-		pool.channels = append(pool.channels, ch)
 	}
-	go func() {
-		i := 0
-		for actor := range recv {
-			for {
-				select {
-				case pool.channels[i] <- actor:
-					break
-				default:
-				}
-				i++
-				if i == pool.count {
-					i = 0
-				}
-			}
-		}
-	}()
-	return pool
+
+	return &p
 }
 
+//Go send func to chan.
 func (p *Pool) Go(actor Actor) {
 	p.recv <- actor
 }
 
+//Close close recv chan
 func (p *Pool) Close() {
 	close(p.recv)
-	for _, c := range p.channels {
-		close(c)
-	}
-}
-
-func (p *Pool) CloseAndWaitAll() {
-	p.Close()
 	p.wg.Wait()
 }

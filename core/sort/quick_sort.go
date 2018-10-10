@@ -6,12 +6,14 @@ import (
 	"github.com/liveball/algoplay/common"
 )
 
-var pool *common.Pool
+var pool = common.New(-1)
 
+//QuickSort serial quick sort
 func QuickSort(list common.List, comparator common.Comparator) {
 	quickSort(list, 0, list.Length()-1, comparator)
 }
 
+//QuickSortConcurrent concurrent quick sort
 func QuickSortConcurrent(list common.List, comparator common.Comparator) {
 	wg := &sync.WaitGroup{}
 	quickSortConcurrent(list, 0, list.Length()-1, comparator, wg)
@@ -70,8 +72,4 @@ func partition(list common.List, low, high int, comparator common.Comparator) (m
 	}
 	exchange(list, low, j)
 	return j
-}
-
-func init() {
-	pool = common.NewPool(-1)
 }
