@@ -56,8 +56,8 @@ func TestQuickSort(t *testing.T) {
 
 func TestQuickSortConcurrent(t *testing.T) {
 
-	// list1 := common.SliceToSimpleList(randomIntGenerator(100000, 200000))
-	list1 := common.SliceToSimpleList(tools.New().Numbers(0, 99, 10))
+	list1 := common.SliceToSimpleList(randomIntGenerator(100, 200000))
+	//list1 := common.SliceToSimpleList(tools.New().Numbers(0, 99, 1000000))
 
 	comparator1 := func(i, j int) bool {
 		return list1.Get(i).(int) <= list1.Get(j).(int)
@@ -77,14 +77,14 @@ func TestQuickSortConcurrent(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			fmt.Println("before :", tt.args.list)
+			//fmt.Println("before :", tt.args.list)
 
 			QuickSortConcurrent(tt.args.list, tt.args.comparator)
 			if !isSorted(list1, comparator1) {
 				t.Fail()
 			}
 
-			fmt.Println("after :", tt.args.list)
+			//fmt.Println("after :", tt.args.list)
 
 		})
 	}
