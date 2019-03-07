@@ -52,10 +52,7 @@ func New(numGoroutines int) *Pool {
 
 //Go send func to chan.
 func (p *Pool) Go(actor Actor) {
-	go func() {
-		p.recv <- actor
-		<-p.chLimit
-	}()
+	go func() { p.recv <- actor }()
 }
 
 //Close close recv chan
