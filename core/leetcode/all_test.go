@@ -14,10 +14,6 @@ func TestBitmapSort(t *testing.T) {
 	expected := [5]uint64{1, 3, 4, 6, 7}
 	actual := [5]uint64{}
 
-	for index := 0; index < 1000; index++ {
-
-	}
-
 	for _, num := range original {
 		bmap.SetBit(num, 1)
 	}
@@ -37,11 +33,10 @@ func TestBitmapSort(t *testing.T) {
 }
 
 func TestBitmap(t *testing.T) {
-	size := uint64(10)
+	size := uint64(9)
 	bmap := NewBitmapSize(size)
-	spew.Dump(bmap.bits)
 
-	count := 100
+	count := 9
 	a := make([]uint64, 0, count)
 	for index := 0; index < count; index++ {
 		a = append(a, uint64(index))
@@ -49,11 +44,17 @@ func TestBitmap(t *testing.T) {
 
 	for _, num := range a {
 		if num%2 == 0 {
-			bmap.SetBit(num, 1)
-		} else {
 			bmap.SetBit(num, 0)
+		} else {
+			bmap.SetBit(num, 1)
 		}
 	}
 
-	println(bmap.Contain(0), bmap.Contain(1))
+	// println(bmap.bits[0]) //128+64+32+16+8+4+2+1 =255
+
+	// for k, v := range bmap.bits {
+	// 	println(k, v)
+	// }
+
+	println(bmap.GetBit(3), bmap.Contain(1))
 }
