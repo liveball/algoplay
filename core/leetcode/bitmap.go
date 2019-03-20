@@ -112,3 +112,18 @@ func (b *BitMap) String() string {
 
 	return fmt.Sprintf("%v", numSlice)
 }
+
+//设置二进制位为1或者0之后，计算对应的十进制
+//o 表示原始十进制数
+//v 当前比特位被设置为 0/1
+//bit 比特位 类似数组下标，从0开始
+func setAttr(o, v int, bit uint8) int {
+	return o&(^(1 << bit)) | (v << bit)
+}
+
+//获取某个十进制数转换为二进制之后，某个比特位的值
+//o 表示原始十进制数
+//bit 比特位 类似数组下标，从0开始
+func attr(o int, bit uint8) int {
+	return (o >> bit) & 1
+}

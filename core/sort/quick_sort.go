@@ -1,87 +1,39 @@
 package sort
 
-import (
-	"sync"
+import "sync"
 
-	"github.com/liveball/algoplay/common"
-)
-
-var pool = common.New(100)
-
-//QuickSort serial quick sort
-func QuickSort(list common.List, comparator common.Comparator) {
-	quickSort(list, 0, list.Length()-1, comparator)
+func QuickSort2(xs []int, wg *sync.WaitGroup) {
+	defer wg.Done()
+	wg.Add(1)
+	go QuickSortHelp(xs, 0, len(xs)-1, wg)
 }
 
-//QuickSortConcurrent concurrent quick sort
-func QuickSortConcurrent(list common.List, comparator common.Comparator) {
-	wg := &sync.WaitGroup{}
-	quickSortConcurrent(list, 0, list.Length()-1, comparator, wg)
-	wg.Wait()
-}
-
-//Close close pool
-func Close() {
-	pool.Close() //让工作池停止工作， 等待所有现有的工作完成
-}
-
-func quickSort(list common.List, low, high int, comparator common.Comparator) {
-	if low >= high {
+func QuickSortHelp(xs []int, p, r int, wg *sync.WaitGroup) {
+	defer wg.Done()
+	if p >= r {
 		return
 	}
-	mid := partition(list, low, high, comparator)
-	quickSort(list, low, mid-1, comparator)
-	quickSort(list, mid+1, high, comparator)
-}
-
-func quickSortConcurrent(list common.List, low, high int, comparator common.Comparator, wg *sync.WaitGroup) {
-	if low >= high {
-		return
-	}
-	mid := partition(list, low, high, comparator)
+	q := partition2(xs, p, r)
 	wg.Add(2)
-	// pool.Go(func() {
-	// 	quickSortConcurrent(list, low, mid-1, comparator, wg)
-	// 	wg.Done()
-	// })
-	go func() {
-		quickSortConcurrent(list, low, mid-1, comparator, wg)
-		wg.Done()
-	}()
-	// pool.Go(func() {
-	// 	quickSortConcurrent(list, mid+1, high, comparator, wg)
-	// 	wg.Done()
-	// })
-	go func() {
-		quickSortConcurrent(list, mid+1, high, comparator, wg)
-		wg.Done()
-	}()
+	go QuickSortHelp(xs, p, q-1, wg)
+	go QuickSortHelp(xs, q+1, r, wg)
 }
 
-func partition(list common.List, low, high int, comparator common.Comparator) (mid int) {
-	// 将数组切分为list[low..j-1] <= a[j] <= a[j+1, high]
-	i, j := low, high+1 // 左右扫描指针
-	// low is 切分元素
-	for {
-		i++
-		for comparator(i, low) {
-			if i == high {
-				break
-			}
+func partition2(xs []int, p, r int) int {
+	e := xs[r]
+	i := p - 1
+	for j := p; j < r; j++ {
+		if xs[j] <= e {
 			i++
+			swap(&(xs[i]), &(xs[j]))
 		}
-		j--
-		for comparator(low, j) {
-			if low == j {
-				break
-			}
-			j--
-		}
-		if i >= j {
-			break
-		}
-		exchange(list, i, j)
 	}
-	exchange(list, low, j)
-	return j
+	swap(&(xs[i+1]), &(xs[r]))
+	return i + 1
+}
+
+func swap(a, b *int) {
+	temp := *a
+	*a = *b
+	*b = temp
 }

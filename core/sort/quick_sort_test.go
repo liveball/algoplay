@@ -1,10 +1,21 @@
 package sort
 
 import (
+	"fmt"
 	"testing"
+	"time"
 
 	"github.com/liveball/algoplay/common"
 )
+
+func Test_quickSort(t *testing.T) {
+	arr := []int{5, 4, 3, 2, 1, 9, 6}
+	start := time.Now()
+	quickSort2(arr, 0, len(arr)-1)
+	elapsed := time.Since(start)
+	fmt.Println(elapsed)
+	fmt.Println(arr)
+}
 
 type args struct {
 	list       common.List
