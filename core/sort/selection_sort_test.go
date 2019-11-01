@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/liveball/algoplay/tools"
+	"algoplay/tools"
 )
 
 func TestSelectionSort(t *testing.T) {

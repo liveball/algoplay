@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/liveball/algoplay/tools"
+	"algoplay/tools"
 )
 
 func TestBubbleSort(t *testing.T) {

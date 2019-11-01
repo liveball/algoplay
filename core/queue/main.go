@@ -3,8 +3,8 @@ package main
 import (
 	"fmt"
 
-	"github.com/liveball/algoplay/core/queue/lock"
-	"github.com/liveball/algoplay/core/queue/lockless"
+	"algoplay/core/queue/lock"
+	"algoplay/core/queue/lockless"
 )
 
 func main() {

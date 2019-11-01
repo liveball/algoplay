@@ -2,8 +2,9 @@ package main
 
 import (
 	"fmt"
-	"gowhole/exercise/algorithm/tree/bplustree"
 	"time"
+
+	"algoplay/core/tree/bplustree"
 )
 
 func main() {
@@ -17,5 +18,6 @@ func bplustree_insert() {
 	for i := testCount; i > 0; i-- {
 		bt.Insert(i, "")
 	}
+
 	fmt.Println(time.Now().Sub(start))
 }

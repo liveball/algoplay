@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"runtime"
 
-	"github.com/liveball/algoplay/common"
-	"github.com/liveball/algoplay/core/sort"
-	"github.com/liveball/algoplay/tools"
+	"algoplay/common"
+	"algoplay/core/sort"
+	"algoplay/tools"
 )
 
 //GOMAXPROCS=1

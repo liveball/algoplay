@@ -3,7 +3,7 @@ package sort
 import (
 	"sync"
 
-	"github.com/liveball/algoplay/common"
+	"algoplay/common"
 )
 
 var pool = common.New(100)

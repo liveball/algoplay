@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/liveball/algoplay/common"
+	"algoplay/common"
 )
 
 func Test_quickSort(t *testing.T) {

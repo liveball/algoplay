@@ -3,7 +3,7 @@ package sort
 import (
 	"testing"
 
-	"github.com/liveball/algoplay/common"
+	"algoplay/common"
 )
 
 func Test_parent(t *testing.T) {

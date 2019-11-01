@@ -1,7 +1,7 @@
 package sort
 
 import (
-	"github.com/liveball/algoplay/common"
+	"algoplay/common"
 )
 
 // HeapSort is heap sort for List

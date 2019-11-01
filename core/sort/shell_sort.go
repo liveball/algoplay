@@ -1,6 +1,6 @@
 package sort
 
-import "github.com/liveball/algoplay/common"
+import "algoplay/common"
 
 //ShellSort for shell sort
 func ShellSort(l common.List, c common.Comparator, c2 common.Comparator) {

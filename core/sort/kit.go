@@ -6,7 +6,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/liveball/algoplay/common"
+	"algoplay/common"
 )
 
 func exchange(list common.List, i, j int) {

@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/liveball/algoplay/common"
-	"github.com/liveball/algoplay/tools"
+	"algoplay/common"
+	"algoplay/tools"
 )
 
 type shellargs struct {
