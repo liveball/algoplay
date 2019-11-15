@@ -1,4 +1,4 @@
-package search
+package main
 
 import (
 	"fmt"
@@ -7,23 +7,49 @@ import (
 	"time"
 )
 
+func Test_binarySearch(t *testing.T) {
+	data := []int{1, 3, 5, 7, 8, 9, 11, 15}
+
+	//c := func(i int) bool { return data[i] > 9 }
+	//
+	//i := sort.Search(len(data)-1, c)
+	//println(i)
+
+	ni := binNormalSearch(data, 5)
+	fmt.Printf("normal index(%d) digit(%d) \n", ni, data[ni])
+
+	//fi := binFirstSearch(data, 8)
+	//fmt.Printf("first index(%d) digit(%d)\n", fi, data[fi])
+	//
+	//li := binLastSearch(data, 8)
+	//fmt.Printf("last index(%d) digit(%d)\n", li, data[li])
+	//
+	//mi := binMaxLessSearch(data, 8)
+	//fmt.Printf("maxless index(%d) digit(%d)\n", mi, data[mi])
+	//
+	//mmi := binMinMoreSearch(data, 8)
+	//fmt.Printf("minmore index(%d) digit(%d)\n", mmi, data[mmi])
+}
+
 // 普通二分查找
-func binNormalSearch(data []int, key int) (mid int) {
-	var (
-		start = 0
-		end   = len(data) - 1
-	)
-	for start <= end {
-		mid = (start + end) >> 1
-		if data[mid] > key {
-			end = mid - 1
-		} else if data[mid] < key {
-			start = mid + 1
+func binNormalSearch(data []int, key int) int {
+
+	i, j := 0, len(data)-1
+
+	f := func(i int) bool { return data[i] >= key }
+
+	for i < j {
+		h := int(uint(i+j) >> 1)
+
+		if !f(h) {
+			i = h + 1
 		} else {
-			return
+			j = h
 		}
+
 	}
-	return
+
+	return i
 }
 
 //查找关键字第一次出现的位置 TODO check wrong
@@ -118,25 +144,6 @@ func binMinMoreSearch(data []int, key int) (mid int) {
 		return start
 	}
 	return
-}
-
-func Test_binarySearch(t *testing.T) {
-	data := []int{18, 16, 17, 1, 3, 5, 7, 9, 8, 8, 15}
-
-	ni := binNormalSearch(data, 8)
-	fmt.Printf("normal index(%d) digit(%d) \n", ni, data[ni])
-
-	fi := binFirstSearch(data, 8)
-	fmt.Printf("first index(%d) digit(%d)\n", fi, data[fi])
-
-	li := binLastSearch(data, 8)
-	fmt.Printf("last index(%d) digit(%d)\n", li, data[li])
-
-	mi := binMaxLessSearch(data, 8)
-	fmt.Printf("maxless index(%d) digit(%d)\n", mi, data[mi])
-
-	mmi := binMinMoreSearch(data, 8)
-	fmt.Printf("minmore index(%d) digit(%d)\n", mmi, data[mmi])
 }
 
 var mids = "268104,389088,1724598,4931952,8820267"

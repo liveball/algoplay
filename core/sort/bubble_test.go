@@ -23,6 +23,23 @@ func bubble(arr []int) {
 	}
 }
 
+func bubble2(a []int) {
+	c := len(a)
+	if c == 0 || c == 1 {
+		return
+	}
+
+	for i := 0; i < len(a); i++ {
+		for j := i + 1; j < len(a); j++ {
+			if a[i] > a[j] {
+				t := a[i]
+				a[i] = a[j]
+				a[j] = t
+			}
+		}
+	}
+}
+
 func Test_bubbleSort(t *testing.T) {
 	arr := []int{5, 4, 3, 2, 1, 9, 6}
 	start := time.Now()

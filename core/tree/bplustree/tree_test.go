@@ -12,7 +12,7 @@ func TestInsert(t *testing.T) {
 
 	start := time.Now()
 	for i := testCount; i > 0; i-- {
-		bt.Insert(i, "")
+		bt.Insert(i, "a")
 	}
 	fmt.Println(time.Now().Sub(start))
 

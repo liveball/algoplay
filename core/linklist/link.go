@@ -1,7 +1,5 @@
 package main
 
-import "fmt"
-
 type ListNode struct {
 	Val  int
 	Next *ListNode
@@ -26,45 +24,48 @@ func hasCycle(head *ListNode) bool {
 }
 
 func reverseList(head *ListNode) *ListNode {
-	//m1
-	// var behind *ListNode
-	// fmt.Println(head)
-	// for head != nil {
-	// 	next := head.Next
-	// 	head.Next = behind
-	// 	behind = head
-	// 	head = next
-	// }
-	// fmt.Println(behind.Next)
+	var p, q *ListNode
 
-	//m2
-	var p, q, r *ListNode
 	p = head
 	q = head.Next
+
 	head.Next = nil
+
 	for q != nil {
-		r = q.Next
+		r := q.Next
 		q.Next = p
 		p = q
 		q = r
 	}
-	head = p
-	fmt.Println(head.Next)
-	return head
+
+	return p
 }
 
 func swapList(head *ListNode) *ListNode {
-	var p, q, r *ListNode
-	p = head
-	q = head.Next
-	head.Next = nil
-	for q != nil {
-		r = q.Next
-		q.Next = p
-		p = q
-		q = r
+	if head == nil || head.Next == nil {
+		return head
 	}
-	return p
+
+	var dummy ListNode
+	dummy.Next = head
+
+	pre := &dummy
+	p := dummy.Next
+	next := p.Next
+
+	for p != nil && next != nil {
+		pre.Next = next
+		p.Next = next.Next
+		next.Next = p
+		pre = p
+		p = p.Next
+		if p != nil {
+			next = p.Next
+		}
+
+	}
+
+	return dummy.Next
 }
 
 // convert *ListNode to []int
