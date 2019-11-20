@@ -1,4 +1,4 @@
-package rpcx
+package wrr
 
 import (
 	"fmt"

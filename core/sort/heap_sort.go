@@ -6,8 +6,8 @@ import (
 
 // HeapSort is heap sort for List
 func HeapSort(list common.List, comp common.Comparator) {
-	BuildMaxHeap(list,comp)
-	for i:=list.Length()-1; i>0; i--{
+	BuildMaxHeap(list, comp)
+	for i := list.Length() - 1; i > 0; i-- {
 		exchange(list, 0, i)
 		list = list.Slice(0, list.Length()-1)
 		maxHeapify(list, 0, comp)

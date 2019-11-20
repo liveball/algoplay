@@ -78,7 +78,6 @@ func maxSlidingWindow2(nums []int, k int) []int {
 	return results
 }
 
-
 func maxSlidingWindow(nums []int, k int) []int {
 	if len(nums) == 0 || len(nums) < k {
 		return make([]int, 0)

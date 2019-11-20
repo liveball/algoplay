@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"reflect"
 	"sort"
+	"strconv"
+	"strings"
 	"unsafe"
 )
 
@@ -145,4 +147,44 @@ func twoSum(nums []int, target int) []int {
 		a[v] = k
 	}
 	return []int{}
+}
+
+const (
+	max = int(^uint32(0) >> 1)
+	min = ^max
+)
+
+func reverse(x int) int {
+	var res int
+
+	for x != 0 {
+		res = res*10 + x%10
+		x /= 10
+
+		if res < min || res > max {
+			return 0
+		}
+	}
+
+	return res
+}
+
+
+func isPalindrome(x int) bool {
+	s:=strconv.Itoa(x)
+
+	ss:=strings.Split(s,"")
+
+	i,j:=0,len(ss)-1
+
+	for i<j{
+		if ss[i]!=ss[j]{
+			return false
+		}
+
+		i++
+		j--
+	}
+
+	return true
 }

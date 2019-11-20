@@ -1,3 +1,3 @@
 package common
 
-type Comparator = func(i, j int)bool
+type Comparator = func(i, j int) bool

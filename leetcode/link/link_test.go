@@ -149,7 +149,6 @@ func printNode(h *ListNode) {
 	}
 }
 
-
 func reverse(head *ListNode) *ListNode {
 	pre := head      //保存新的头节点
 	cur := head.Next //保存当前节点
