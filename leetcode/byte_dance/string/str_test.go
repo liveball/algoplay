@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"math"
 	"strings"
 	"testing"
 )
@@ -30,6 +31,25 @@ func Test_lengthOfLongestSubstring(t *testing.T) { //无重复字符的最长子
 	//for _, v := range tests {
 	//	fmt.Println(lengthOfLongestSubstring3(v))
 	//}
+}
+
+func Test_longestCommonPrefix(t *testing.T) {
+	tests := [][]string{
+		{
+			"flower",
+			"flow",
+			"flight",
+		},
+		{
+			"dog",
+			"racecar",
+			"car",
+		},
+	}
+
+	for _, v := range tests {
+		fmt.Println(longestCommonPrefix(v))
+	}
 }
 
 func palindrome(s string) bool {
@@ -123,14 +143,14 @@ func lengthOfLongestSubstring2(s string) int {
 	window, start := 0, 0
 
 	for key := 0; key < len(s); key++ {
-		isExist := strings.Index(string(s[start:key]), string(s[key]))//判断当前字符是否在窗口内
+		isExist := strings.Index(string(s[start:key]), string(s[key])) //判断当前字符是否在窗口内
 
-		if isExist != -1 {//如果在窗口内，重新计算窗口起始位置
+		if isExist != -1 { //如果在窗口内，重新计算窗口起始位置
 			start = start + 1 + isExist
 
-		} else {//如果不在窗口内，计算当前窗口大小
+		} else { //如果不在窗口内，计算当前窗口大小
 			max := key - start + 1
-			if max > window {//比较当前窗口和上次窗口大小，取最大
+			if max > window { //比较当前窗口和上次窗口大小，取最大
 				window = max
 			}
 		}
@@ -162,4 +182,63 @@ func lengthOfLongestSubstring3(s string) int {
 	}
 
 	return max(window, len(s)-start)
+}
+
+func longestCommonPrefix(strs []string) string {
+	n := len(strs)
+	// 输入为空直接返回空
+	if n == 0 {
+		return ""
+		// 只输入一个字符串那么它自己就是最长公共后缀
+	} else if n == 1 {
+		return strs[0]
+		// 如果基准字符串是空，那么直接返回空
+	} else if len(strs[0]) == 0 {
+		return ""
+	}
+
+	// 最长公共前缀再长也不可能比最短的输入字符串还要长对吧。输入源越多，基准字符串不是最短字符串的可能性越大。
+	// 因此进行初步优化，求输入源中最短的那个字符串长度，然后把基准字符串按该长度重新截取
+	minStrLen := math.MaxInt32
+	for i := 0; i < n; i++ {
+		if minStrLen > len(strs[i]) {
+			minStrLen = len(strs[i])
+		}
+	}
+
+	prefix := strs[0][0:minStrLen]
+	// 标志位，如果为true说明在其它所有字符串中都找到了相同的前缀
+	var allFound bool
+	for {
+		allFound = true
+		// 循环其它字符串
+		for i := 1; i < n; i++ {
+			// 查询是否包含基准字符串，因为求的是前缀，所以index值为0
+			if strings.Index(strs[i], prefix) != 0 {
+				// 不包含的话削掉基准字符串的尾端以便开展下次查询工作
+				prefix = prefix[0 : len(prefix)-1]
+				// 标志位置为false说明查询失败
+				allFound = false
+				// 跳出吧，也没必要再查其它字符串了
+				break
+			}
+		}
+		// 如果查询成功，跳出大循环，直接返回当前基准字符串就行了。所以该算法最好的情况就是第一次查询就成功。
+		// 如果基准字符串都被砍光了，说明没有最长公共后缀，所以该算法的最差的情况就是最后一个字符串和基准字符串完全没有公共前缀，而中间的字符串都能找到公共前缀，这会导致循环minStrLen * (n - 1)次。
+		if allFound || len(prefix) == 0 {
+			break
+		}
+	}
+	return prefix
+}
+
+//字符串的排列
+//给定两个字符串 s1 和 s2，写一个函数来判断 s2 是否包含 s1 的排列。
+//换句话说，第一个字符串的排列之一是第二个字符串的子串。
+
+//输入: s1 = "ab" s2 = "eidbaooo"
+//输出: True
+//解释: s2 包含 s1 的排列之一 ("ba").
+func checkInclusion(s1 string, s2 string) bool {
+
 }

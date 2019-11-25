@@ -16,6 +16,8 @@ func main() {
 	vs = append(vs, 10)
 	inst(vs)
 	fmt.Println(vs)
+
+	fmt.Println(111)
 }
 
 func inst(vals []int) {
