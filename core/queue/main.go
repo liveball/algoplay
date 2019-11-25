@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	// testLock()
+	//testLock()
 	testLockLess()
 }
 
