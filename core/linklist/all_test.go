@@ -16,6 +16,6 @@ func Test_swapList(t *testing.T) {
 }
 
 func Test_hasCycle(t *testing.T) {
-	in := []int{1, 2, 3, 4, 5}
+	in := []int{1, 2, 3, 4, 5, 1, 2, 3, 4, 5}
 	println(hasCycle(s2l(in)))
 }
