@@ -1,17 +1,15 @@
 package trie
 
-import "fmt"
+import "strings"
 
 type TrieNode struct {
 	children []*TrieNode
 
-	data         byte
 	isEndingChar bool
 }
 
-func NewTrie(data byte) (tn TrieNode) {
-	tn = TrieNode{
-		data:     data,
+func NewTrie() (tn *TrieNode) {
+	tn = &TrieNode{
 		children: make([]*TrieNode, 26),
 	}
 
@@ -26,7 +24,7 @@ func (tn *TrieNode) Insert(data string) {
 
 		if p.children[index] == nil {
 			p.children[index] = &TrieNode{
-				data: data[i],
+				children: make([]*TrieNode, 26),
 			}
 		}
 
@@ -34,6 +32,7 @@ func (tn *TrieNode) Insert(data string) {
 	}
 
 	p.isEndingChar = true
+	strings.ToLower()
 }
 
 func (tn *TrieNode) Find(pattern string) bool {
@@ -54,17 +53,34 @@ func (tn *TrieNode) Find(pattern string) bool {
 	}
 
 	return true //找到pattern
-
 }
 
-func (tn *TrieNode) String() string {
-	result := "head"
+func (tn *TrieNode) StartsWith(prefix string) bool {
+	p := tn
 
-	for tn != nil && tn.children != nil {
-		result += fmt.Sprintf("<-%+v", string(tn.data))
+	for i := 0; i < len(prefix); i++ {
+		index := prefix[i] - 'a'
+
+		if ch := p.children[index]; ch == nil {
+			return false
+		} else {
+			p = ch
+		}
 	}
 
-	result += "<-tail"
-
-	return result
+	return true
 }
+
+//func (tn *TrieNode) String() string {
+//	result := "head"
+//
+//	for tn != nil && len(tn.children)>0 {
+//		for key := range tn.children {
+//			result += fmt.Sprintf("<-%+v", string(key))
+//		}
+//	}
+//
+//	result += "<-tail"
+//
+//	return result
+//}

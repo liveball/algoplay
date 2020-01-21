@@ -44,9 +44,11 @@ var (
 )
 
 func Test_242(t *testing.T) {
-	for _, value := range strs {
-		fmt.Println(value[0], value[1], isAnagram3(value[0], value[1]))
-	}
+	fmt.Println("get", getOnlyOneChar("aqabcdbdq"))
+
+	//for _, value := range strs {
+	//	fmt.Println(value[0], value[1], isAnagram3(value[0], value[1]))
+	//}
 }
 
 //hash 计数
@@ -121,4 +123,25 @@ func isAnagram3(s string, t string) bool {
 	}
 
 	return true
+}
+
+func getOnlyOneChar(s string) string {
+	if len(s) == 0 {
+		return ""
+	}
+
+	var chs [26]int
+	var chs2 [26]int32
+	for _, v := range s {
+		chs[v-'a']++
+		chs2[v-'a'] = v
+	}
+
+	for k, v := range chs {
+		if v == 1 {
+			return string(chs2[k])
+		}
+	}
+
+	return ""
 }
