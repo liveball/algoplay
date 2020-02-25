@@ -1,8 +1,6 @@
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
 
 func main() {
 	GuessingGame()
@@ -40,3 +38,4 @@ func Search(n int, f func(int) bool) int {
 	// i == j, f(i-1) == false, and f(j) (= f(i)) == true  =>  answer is i.
 	return i
 }
+

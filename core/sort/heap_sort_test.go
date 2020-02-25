@@ -63,12 +63,14 @@ func TestHeapSort(t *testing.T) {
 	comp1 := func(i, j int) bool {
 		return list1.Get(i).(int) <= list1.Get(j).(int)
 	}
+
 	tests := []struct {
 		name string
 		args args
 	}{
 		{"1", args{list1, comp1}},
 	}
+
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			HeapSort(tt.args.list, tt.args.comp)

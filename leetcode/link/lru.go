@@ -1,132 +1,73 @@
 package link
 
 type Node struct {
-	Next *Node
+	Key  int
 	Val  int
+	Next *Node
+	Prev *Node
 }
 
-type LRU struct {
-	Head   *Node
-	Tail   *Node
-	Length int
-	Cap    int
+type LRUCache struct {
+	limit int
+	hash  map[int]*Node
+	Head  *Node
+	Tail  *Node
 }
 
-// 用链表实现lru 缓存队列
+func Constructor(capacity int) LRUCache {
+	h := &Node{-1, -1, nil, nil}
+	t := &Node{-1, -1, nil, nil}
+	h.Next = t
+	t.Prev = h
 
-//1、如果缓存队列中命中该数据
-//     将该数据对应的节点删除，并将该数据添加到链表的头部
-
-//2、如果缓存队列中没有命中该数据
-//     若缓存未满则直接将数据添加到链表头部
-//     若缓存已满，则先删除链表尾部的节点，再将该数据添加到链表头部
-
-func New() (lru *LRU) {
-	lru = &LRU{
-		Cap: 10,
-	}
-	return
-}
-
-func (lru *LRU) Init() {
-	lru.Cap = 0    // 此时链表是空的
-	lru.Head = nil // 没有车头
-	lru.Tail = nil // 没有车尾
-}
-
-func (lru *LRU) Append2(node *Node) {
-	if lru.Length == 0 { // 无元素的时候添加
-		lru.Head = node // 这是单链表的第一个元素，也是链表的头部
-		lru.Tail = node // 同时是单链表的尾部
-		lru.Length = 1  // 单链表有了第一个元素
-	} else { // 有元素了再添加
-		oldTail := lru.Tail
-		oldTail.Next = node // node放到尾部元素后面
-		lru.Tail = node     // node成为新的尾部
-		lru.Length++        // 元素数量增加
+	hash := make(map[int]*Node, capacity)
+	return LRUCache{
+		hash:  hash,
+		limit: capacity,
+		Head:  h,
+		Tail:  t,
 	}
 }
 
-func (lru *LRU) Append(node *Node) bool {
-	if node == nil {
-		return false
-	}
+func (this *LRUCache) insert(node *Node) {
+	t := this.Tail
+	node.Prev = t.Prev
+	t.Prev.Next = node
+	node.Next = t
+	t.Prev = node
+}
 
-	node.Next = nil
-	// 将新元素放入单链表中
-	if lru.Length == 0 {
-		lru.Head = node
+func (this *LRUCache) remove(node *Node) {
+	node.Prev.Next = node.Next
+	node.Next.Prev = node.Prev
+}
+
+func (this *LRUCache) Get(key int) int {
+	if v, ok := this.hash[key]; ok {
+		this.remove(v)
+		this.insert(v)
+		return v.Val
 	} else {
-		oldTail := lru.Tail
-		oldTail.Next = node
-	}
-
-	// 调整尾部位置，及链表元素数量
-	lru.Tail = node // node成为新的尾部
-	lru.Length++    // 元素数量增加
-
-	return true
-}
-
-func (lru *LRU) Query(key int) (hit bool) {
-	if lru.Node == nil {
-		hit = false
-		return
-	}
-
-	head := lru.Node
-	for n := head; n != nil; n = n.Next {
-		if n.Val == key {
-			hit = true
-		}
-
-		lru.Length++ //计算队列长度
-	}
-
-	return
-}
-
-func (lru *LRU) AddCache(key int) {
-	if lru.Query(key) { //缓存队列中存在
-
-	} else { //缓存队列中不存在
-		if lru.Length > lru.Cap { //超过缓存容量
-
-		} else {
-
-		}
+		return -1
 	}
 }
 
-func (lru *LRU) AddNode(key int) {
-	if lru.Length == 0 {
-		lru.Node = &Node{
-			Val: key,
+func (this *LRUCache) Put(key, val int) {
+	if v, ok := this.hash[key]; ok {
+		this.remove(v)
+		this.insert(v)
+		v.Val = val
+	} else {
+		if len(this.hash) >= this.limit {//如果此时缓存已满，则链表尾结点删除，将新的数据结点插入链表的头部
+			h := this.Head.Next
+			this.remove(h)
+			delete(this.hash, h.Key)
 		}
-		return
-	}
 
-	if lru.Length > 0 {
-		cur := lru.Node
-		head := &Node{
-			Val: key,
-		}
-		head.Next = cur
-		lru.Node = head
+		//如果此时缓存未满，则将此结点直接插入到链表的头部
+		node := &Node{key, val, nil, nil}
+		this.hash[key] = node
+		this.insert(node)
 	}
 }
 
-func (lru *LRU) DelNode(key int) {
-	if lru.Length == 0 {
-		return
-	}
-
-	if lru.Length > 0 {
-		for n := lru.Node; n != nil; n = n.Next {
-			if n.Val == key {
-				n = n.Next
-				break
-			}
-		}
-	}
-}

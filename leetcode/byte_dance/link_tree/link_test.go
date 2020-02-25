@@ -15,10 +15,12 @@ func Test_reverse(t *testing.T) {
 // convert *ListNode to []int
 func L2s(head *ListNode) []int {
 	res := []int{}
+
 	for head != nil {
 		res = append(res, head.Val)
 		head = head.Next
 	}
+
 	return res
 }
 
@@ -27,9 +29,11 @@ func S2l(nums []int) *ListNode {
 	if len(nums) == 0 {
 		return nil
 	}
+
 	res := &ListNode{
 		Val: nums[0],
 	}
+
 	temp := res
 	for i := 1; i < len(nums); i++ {
 		temp.Next = &ListNode{
@@ -37,6 +41,7 @@ func S2l(nums []int) *ListNode {
 		}
 		temp = temp.Next
 	}
+
 	return res
 }
 
@@ -151,20 +156,21 @@ func printNode(h *ListNode) {
 //进阶:
 //你可以迭代或递归地反转链表。你能否用两种方法解决这道题？
 func reverseList(head *ListNode) *ListNode {
-	if head==nil{
+	if head == nil {
 		return nil
 	}
 
 	var pre *ListNode
 	pre = nil
-	cur:=head
+	cur := head
 
-	for cur!=nil{
-		next:=cur.Next
-		cur.Next=pre
-		pre=cur
-		cur=next
+	for cur != nil {
+		next := cur.Next
+		cur.Next = pre
+		pre = cur
+		cur = next
 	}
+
 	return pre
 }
 
@@ -206,7 +212,6 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 	return reverseList(newHeader.Next)
 }
 
-
 func addNode(l1 *ListNode, l2 *ListNode, offset int) *ListNode {
 	if l1 == nil {
 		return nil
@@ -216,10 +221,10 @@ func addNode(l1 *ListNode, l2 *ListNode, offset int) *ListNode {
 		res, node *ListNode
 	)
 
-	if offset == 0 {//两条链表长度一致
-		res = &ListNode{Val: l1.Val + l2.Val, Next: nil}//首节点相加
+	if offset == 0 { //两条链表长度一致
+		res = &ListNode{Val: l1.Val + l2.Val, Next: nil} //首节点相加
 		node = addNode(l1.Next, l2.Next, 0)
-	} else {//两条链表长度不一致 l1>l2
+	} else { //两条链表长度不一致 l1>l2
 		res = &ListNode{Val: l1.Val, Next: nil}
 		node = addNode(l1.Next, l2, offset-1)
 	}
@@ -229,15 +234,18 @@ func addNode(l1 *ListNode, l2 *ListNode, offset int) *ListNode {
 		node.Val = node.Val % 10
 	}
 	res.Next = node
+
 	return res
 }
 
 func getLength(l *ListNode) int {
 	count := 0
 	cur := l
+
 	for cur != nil {
 		count++
 		cur = cur.Next
 	}
+
 	return count
 }
