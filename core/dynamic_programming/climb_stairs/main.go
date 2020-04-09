@@ -1,7 +1,19 @@
 package main
 
-func main() {
+import (
+	"fmt"
+	"time"
+)
 
+func main() {
+	start := time.Now()
+	//climb(40) //450ns  40-307.919512ms
+	//climbMemo(10,make(map[int]int))//2.042µs
+	climbByDynamic(40)//117ns  40-125ns
+	//climbStairs(1000) //3.168µs
+
+	end := time.Now()
+	fmt.Println(end.Sub(start))
 }
 
 func climb(n int) int {

@@ -1,5 +1,7 @@
 package my_sort
 
+import "fmt"
+
 //快排的思想是这样的：如果要排序数组中下标从 p 到 r 之间的一组数据，
 //我们选择 p 到 r 之间的任意一个数据作为 pivot（分区点）。
 //我们遍历 p 到 r 之间的数据，将小于 pivot 的放到左边，
@@ -47,18 +49,19 @@ func partition(a []int, p, r int) int {
 
 	i := p
 
-	//fmt.Println("pivot", pivot, i)
+	fmt.Println("pivot", pivot, i, r)
 	for j := p; j < r; j++ {
-		//fmt.Println("before exchange by pivot", a)
+		fmt.Println("before exchange by pivot", a)
 		if a[j] < pivot {
 			a[i], a[j] = a[j], a[i]
 			i++
 		}
-		//fmt.Println("after exchange by pivot", a)
+		fmt.Println("after exchange by pivot", a)
 	}
 
 	a[i], a[r] = a[r], a[i]
 
+	fmt.Println("pivot", i, a)
 	return i
 }
 
