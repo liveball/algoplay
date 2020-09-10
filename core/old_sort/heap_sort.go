@@ -1,4 +1,4 @@
-package sort
+package old_sort
 
 import (
 	"algoplay/common"
@@ -15,6 +15,7 @@ func HeapSort(list common.List, comp common.Comparator) {
 		maxHeapify(list, 0, comp)
 	}
 }
+
 // BuildMaxHeap 构建最大堆
 func BuildMaxHeap(list common.List, comp common.Comparator) {
 	lastRoot := list.Length()/2 - 1
@@ -53,8 +54,6 @@ func maxHeapify(list common.List, i int, comp common.Comparator) {
 		}
 	}
 }
-
-
 
 // IsMaxHeap 判断是否符合最大堆性质：list[parent(i)] >= list[i] for all i > 0
 func IsMaxHeap(list common.List, comp common.Comparator) bool {

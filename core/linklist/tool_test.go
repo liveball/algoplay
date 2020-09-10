@@ -110,4 +110,3 @@ func Test_MergeSortedList(t *testing.T) {
 	l := MergeSortedList(l1, l2)
 	Print(l)
 }
-

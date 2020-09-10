@@ -1,6 +1,5 @@
 package queue
 
-
 //例题分析
 //LeetCode 第 239 题：给定一个数组 nums，有一个大小为 k 的滑动窗口从数组的最左侧移动到数组的最右侧。你只可以看到在滑动窗口 k 内的数字，
 //滑动窗口每次只向右移动一位。返回滑动窗口最大值。
@@ -92,4 +91,3 @@ func maxSlidingWindow(nums []int, k int) []int {
 
 	return result
 }
-

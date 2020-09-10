@@ -16,7 +16,7 @@ func main() {
 	println("start NumGoroutine:", runtime.NumGoroutine())
 
 	testQuickSort()
-	sort.Close()
+	old_sort.Close()
 	println("end NumGoroutine:", runtime.NumGoroutine())
 }
 
@@ -49,7 +49,7 @@ func testQuickSort() {
 		// fmt.Println("before :", tt.args.list)
 
 		// sort.QuickSort(tt.args.list, tt.args.comparator)
-		sort.QuickSortConcurrent(tt.args.list, tt.args.comparator)
+		old_sort.QuickSortConcurrent(tt.args.list, tt.args.comparator)
 
 		fmt.Println("after :", tt.args.list)
 

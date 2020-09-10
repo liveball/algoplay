@@ -20,10 +20,10 @@ func TestSkipList(t *testing.T) {
 	t.Log("插入abc，查找abc", trie.Find("abc"))
 
 	trie.Insert("apple")
-	t.Log(trie.Find("apple"))   // 返回 true
-	t.Log(trie.Find("app"))     // 返回 false
+	t.Log(trie.Find("apple"))     // 返回 true
+	t.Log(trie.Find("app"))       // 返回 false
 	t.Log(trie.StartsWith("app")) // 返回 true
 	trie.Insert("app")
-	t.Log(trie.Find("app"))     // 返回 true
+	t.Log(trie.Find("app")) // 返回 true
 
 }

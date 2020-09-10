@@ -1,7 +1,6 @@
 package sort
 
 import (
-	"sort"
 	"testing"
 )
 
@@ -12,7 +11,7 @@ var (
 )
 
 func Test_quickSort(t *testing.T) {
-	sort.Ints(nums)
-	//QuickSort(nums)
+	//sort.Ints(nums)
+	QuickSort(nums)
 	t.Log(nums)
 }

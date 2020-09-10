@@ -60,10 +60,10 @@ func Test_RemoveMin(t *testing.T) {
 }
 
 func Test_heap(t *testing.T) {
-	cnt:=10
+	cnt := 10
 	h := NewHeap(cnt)
 
-	for i:=1;i<=cnt;i++ {
+	for i := 1; i <= cnt; i++ {
 		h.insert(i)
 	}
 

@@ -169,16 +169,15 @@ func reverse(x int) int {
 	return res
 }
 
-
 func isPalindrome(x int) bool {
-	s:=strconv.Itoa(x)
+	s := strconv.Itoa(x)
 
-	ss:=strings.Split(s,"")
+	ss := strings.Split(s, "")
 
-	i,j:=0,len(ss)-1
+	i, j := 0, len(ss)-1
 
-	for i<j{
-		if ss[i]!=ss[j]{
+	for i < j {
+		if ss[i] != ss[j] {
 			return false
 		}
 

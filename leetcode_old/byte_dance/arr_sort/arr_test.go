@@ -11,8 +11,6 @@ func Test_threeSum(t *testing.T) {
 	fmt.Println(threeSum(nums))
 }
 
-
-
 //三数之和
 
 //给定一个包含 n 个整数的数组 nums，判断 nums 中是否存在三个元素 a，b，c ，使得 a + b + c = 0 ？找出所有满足条件且不重复的三元组。
@@ -58,18 +56,17 @@ func threeSum(nums []int) [][]int {
 	return res
 }
 
-
 func merge(nums1 []int, m int, nums2 []int, n int) {
 	i := m - 1
 	j := n - 1
 	k := m + n - 1
 
-	for k >= 0{
+	for k >= 0 {
 		//如果原数组 nums1[i]大于 原数组nums2[j] 则新数组 nums1[k]填充nums1[i]，否则填充nums2[j]
-		if (j < 0 || (i >= 0 && nums1[i] > nums2[j])) {
+		if j < 0 || (i >= 0 && nums1[i] > nums2[j]) {
 			nums1[k] = nums1[i]
 			i-- //原始数组nums1搬移坐标左移
-		} else{
+		} else {
 			nums1[k] = nums2[j]
 			j-- //原始数组nums2搬移坐标左移
 		}
@@ -77,4 +74,3 @@ func merge(nums1 []int, m int, nums2 []int, n int) {
 		k-- //新始数组nums1搬移坐标左移
 	}
 }
-

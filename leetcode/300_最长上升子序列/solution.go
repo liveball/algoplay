@@ -1,14 +1,12 @@
 package _00_最长上升子序列
 
-
-
 func lengthOfLIS(nums []int) int {
 
 	// return lengthOfLIS_Recursion(nums)// 递归 时间复杂度 O(2^n)
 
-	// return dp_BottomUp(nums)//自底向上 遍历子问题. 时间复杂度: O(n^2), 空间复杂度: O(n)
+	return dp_BottomUp(nums) //自底向上 遍历子问题. 时间复杂度: O(n^2), 空间复杂度: O(n)
 
-	return lengthOfLIS_BinarySearch(nums) //二分查找插入位置 时间复杂度: O(n*log(n)), 空间复杂度: O(n)
+	//return lengthOfLIS_BinarySearch(nums) //二分查找插入位置 时间复杂度: O(n*log(n)), 空间复杂度: O(n)
 }
 
 //自底向上指的是，通过状态转移方程，从最小的问题规模入手，不断的增加问题规模，
@@ -29,10 +27,8 @@ func dp_BottomUp(nums []int) int {
 
 	for i := 0; i < len(nums); i++ {
 		for j := 0; j < i; j++ {
-			if nums[j] < nums[i] && dp[i] < dp[j]+1 { // nums[i]与i前面的数nums[j]一一对比，如果nums[i]比较大，则候选长度+1
-				dp[i] = dp[j] + 1
-
-				// dp[i] = max(dp[i], dp[j] + 1)
+			if nums[j] < nums[i] { // nums[i]与i前面的数nums[j]一一对比，如果nums[i]比较大，则候选长度+1
+				dp[i] = max(dp[i], dp[j]+1)
 			}
 		}
 
@@ -54,31 +50,28 @@ func lengthOfLIS_BinarySearch(nums []int) int {
 		return 0
 	}
 
-	d := make([]int, len(nums))
-	length := 0 //数组d实际使用的容量
-
+	lis := make([]int, 0, len(nums))
 	for i := 0; i < len(nums); i++ { //在长度为length的数组中， 找到nums[i]的插入位置
-		j := binarySearch(d, length, nums[i])
+		pos := binarySearch(lis, 0, len(lis)-1, nums[i])
 
-		d[j] = nums[i]   //把数字nums[i] 插入到d[i]
-		if j == length { //如果i等于当前长度， 说明i已追加到数组d的尾部
-			length++
+		if pos == len(lis) { //如果pos等于当前长度， 说明i已追加到数组d的尾部
+			lis = append(lis, nums[i])
+		} else {
+			lis[pos] = nums[i] //覆盖
 		}
 	}
 
-	return length
+	return len(lis)
 }
 
-func binarySearch(d []int, l, x int) int {
-	low, high := 0, l-1
+func binarySearch(nums []int, low, high, target int) int {
 	for low <= high {
 		mid := (low + high) >> 1
-		if x < d[mid] {
-			high = mid - 1
-		} else if x > d[mid] {
+
+		if target > nums[mid] {
 			low = mid + 1
 		} else {
-			return mid
+			high = mid - 1
 		}
 	}
 

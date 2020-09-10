@@ -101,9 +101,8 @@ func TestAttr(t *testing.T) {
 	fmt.Println(attr(6, 3), attr(6, 2), attr(6, 1), attr(6, 0))
 }
 
-
 func Test_reverse(t *testing.T) {
-	a := []int{123,  -123, 120}
+	a := []int{123, -123, 120}
 
 	for _, v := range a {
 		fmt.Println(reverse(v))

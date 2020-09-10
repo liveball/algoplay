@@ -1,4 +1,4 @@
-package sort
+package old_sort
 
 //BubbleSort for bubble sort
 func BubbleSort(data interface{}) {

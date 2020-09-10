@@ -96,5 +96,5 @@ func intToRoman(num int) string {
 //]
 
 func generate(numRows int) [][]int {
-   return [][]int{}
+	return [][]int{}
 }

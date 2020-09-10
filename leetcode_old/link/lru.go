@@ -58,7 +58,7 @@ func (this *LRUCache) Put(key, val int) {
 		this.insert(v)
 		v.Val = val
 	} else {
-		if len(this.hash) >= this.limit {//如果此时缓存已满，则链表尾结点删除，将新的数据结点插入链表的头部
+		if len(this.hash) >= this.limit { //如果此时缓存已满，则链表尾结点删除，将新的数据结点插入链表的头部
 			h := this.Head.Next
 			this.remove(h)
 			delete(this.hash, h.Key)
@@ -70,4 +70,3 @@ func (this *LRUCache) Put(key, val int) {
 		this.insert(node)
 	}
 }
-

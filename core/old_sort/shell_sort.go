@@ -1,4 +1,4 @@
-package sort
+package old_sort
 
 import "algoplay/common"
 

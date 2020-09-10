@@ -1,6 +1,5 @@
 package main
 
-
 // convert *ListNode to []int
 func l2s(head *Node) []int {
 	res := []int{}

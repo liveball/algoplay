@@ -1,4 +1,4 @@
-package sort
+package old_sort
 
 import (
 	"fmt"
@@ -45,6 +45,6 @@ func Test_bubbleSort(t *testing.T) {
 	start := time.Now()
 	bubble(arr)
 	elapsed := time.Since(start)
-	fmt.Println(elapsed)
 	fmt.Println(arr)
+	fmt.Println(elapsed)
 }

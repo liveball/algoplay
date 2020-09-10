@@ -1,4 +1,4 @@
-package array
+package main
 
 type MyStack struct {
 	a []int

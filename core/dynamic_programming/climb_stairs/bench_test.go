@@ -50,4 +50,3 @@ func Benchmark_climbStairs(b *testing.B) {
 //pkg: algoplay/core/dynamic_programming/climb_stairs
 //Benchmark_climbStairs-4   	30000000	        46.2 ns/op
 //PASS
-

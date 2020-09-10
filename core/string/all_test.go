@@ -15,7 +15,7 @@ func Test_reverseString(t *testing.T) {
 	reverseString(a)
 	fmt.Println(string(a))
 
-	b:=[]byte("abcdef")
+	b := []byte("abcdef")
 	reverseString(b)
 	fmt.Println(string(b))
 }

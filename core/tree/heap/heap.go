@@ -101,7 +101,7 @@ func HeapSort(a []int, n int) {
 }
 
 func BuildHeap(a []int, n int) {
-	for i := n / 2; i >=0; i-- {
+	for i := n / 2; i >= 0; i-- {
 		minHeapify(a, i, n) //每次从i节点往下开始堆化，且元素个数不变
 		//maxHeapify(a, i, n)
 	}
