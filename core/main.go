@@ -24,18 +24,18 @@ func sum(a, b string) string {
 		return a
 	}
 
-	m,n:=len(a), len(b)
+	m, n := len(a), len(b)
 
 	var max int
-	if m >  n{
-		b = strings.Repeat("0", m - n) + b
+	if m > n {
+		b = strings.Repeat("0", m-n) + b
 		max = m
 
-	} else if m <  n {
-		a = strings.Repeat("0", n  - m) + a
+	} else if m < n {
+		a = strings.Repeat("0", n-m) + a
 		max = n
 	} else {
-		m=n
+		m = n
 	}
 
 	var res string
