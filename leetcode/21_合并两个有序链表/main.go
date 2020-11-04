@@ -20,7 +20,7 @@ type ListNode struct {
 
 func mergeTwoListsRecursion(l1 *ListNode, l2 *ListNode) *ListNode {
 	if l1 == nil && l2 == nil {
-		return l2
+		return nil
 	}
 
 	if l1 == nil {
