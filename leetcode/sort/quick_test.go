@@ -12,6 +12,6 @@ var (
 
 func Test_quickSort(t *testing.T) {
 	//sort.Ints(nums)
-	QuickSort(nums)
+	quickSort(nums)
 	t.Log(nums)
 }
