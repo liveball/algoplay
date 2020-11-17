@@ -22,7 +22,7 @@ func sumMax(nums []int) int {
 	res := nums[0] //假设第一个元素最大
 	sum := 0       //计算和
 	for i := 1; i < len(nums)-1; i++ {
-		if sum > 0 { //大于0 则累加
+		if sum >= 0 { //大于0 则累加
 			sum = sum + nums[i]
 		} else { //小于0 则覆盖
 			sum = nums[i]
