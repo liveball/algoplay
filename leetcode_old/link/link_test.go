@@ -58,7 +58,7 @@ func swapPairs(head *ListNode) *ListNode { //递归交换
 	return t
 }
 
-func swapPairs2(head *ListNode) *ListNode { //递归交换
+func swapPairs2(head *ListNode) *ListNode { //非递归交换
 
 	if head == nil || head.Next == nil {
 		return head

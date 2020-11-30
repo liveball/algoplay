@@ -1,7 +1,11 @@
 package main
 
-func main() {
+import (
+	"fmt"
+)
 
+func main() {
+	fmt.Println(getSecMax([]int{1, 2, 3, 4, 5, 6}))
 }
 
 func getSecMax(nums []int) int {
