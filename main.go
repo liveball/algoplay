@@ -5,7 +5,6 @@ import (
 	"runtime"
 
 	"algoplay/common"
-	"algoplay/core/sort"
 	"algoplay/tools"
 )
 
@@ -16,7 +15,6 @@ func main() {
 	println("start NumGoroutine:", runtime.NumGoroutine())
 
 	testQuickSort()
-	old_sort.Close()
 	println("end NumGoroutine:", runtime.NumGoroutine())
 }
 

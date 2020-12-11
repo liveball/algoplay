@@ -1,7 +1,29 @@
 package main
 
+import(
+	"fmt"
+)
+
 func main()  {
-	
+	deferCall()
+}
+
+// 打印中
+// 打印前
+// panic: 触发异常
+// goroutine 1 [running]:
+
+func deferCall()  {
+	defer func ()  {
+		fmt.Println("打印前")
+	}()
+	defer func ()  {
+		fmt.Println("打印中")
+	}()
+	panic("触发异常")
+	defer func ()  {
+		fmt.Println("打印后")
+	}()
 }
 
 /**
