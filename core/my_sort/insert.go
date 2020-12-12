@@ -10,10 +10,10 @@ func insertSort(arr []int) {
 	for i := 1; i < len(arr)-1; i++ {
 		temp := arr[i]
 		j := i - 1
-		for ; j >= 0;j--{
-			if arr[j] > temp{
+		for ; j >= 0; j-- {
+			if arr[j] > temp {
 				arr[j+1] = arr[j]
-			}else {
+			} else {
 				break
 			}
 		}

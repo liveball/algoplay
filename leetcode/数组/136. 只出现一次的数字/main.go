@@ -1,6 +1,8 @@
 package main
 
-func main(){}
+import "fmt"
+
+func main() {}
 
 func singleNumber(nums []int) int {
 	exist := make(map[int]int)

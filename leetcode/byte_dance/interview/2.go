@@ -46,7 +46,7 @@ package interview
 //解释: (0,0) 位置的树，你可以直接砍去，不用算步数
 
 func cutOffTree(forest [][]int) int {
-
+	return 0
 }
 
 //罗马数字包含以下七种字符： I， V， X， L，C，D 和 M。
@@ -74,7 +74,7 @@ func cutOffTree(forest [][]int) int {
 //输出: "III"
 
 func intToRoman(num int) string {
-
+	return ""
 }
 
 //给定一个非负整数 numRows，生成杨辉三角的前 numRows 行。

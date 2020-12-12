@@ -1,29 +1,30 @@
 package main
 
+import "fmt"
+
 func main() {
-   fmt.Println(firstUniqChar(abaccdeff))
+	fmt.Println(firstUniqChar("abaccdeff"))
 }
 
 func firstUniqChar(s string) byte {
-    if s==""{
-        return ' '
-    }
+	if s == "" {
+		return ' '
+	}
 
-    var chs [26]int
+	var chs [26]int
 
+	for _, v := range s {
+		chs[v-'a']++
 
-    for _,v :=range s{
-         chs[v-'a']++
-      
-    }
+	}
 
-    for k,v :=range s{
-        if chs[v-'a']==1{
-            return s[k]
-        }
-    }
+	for k, v := range s {
+		if chs[v-'a'] == 1 {
+			return s[k]
+		}
+	}
 
-    return ' '
+	return ' '
 }
 
 // 剑指 Offer 50. 第一个只出现一次的字符
@@ -34,9 +35,8 @@ func firstUniqChar(s string) byte {
 // s = "abaccdeff"
 // 返回 "b"
 
-// s = "" 
+// s = ""
 // 返回 " "
- 
 
 // 限制：
 

@@ -32,7 +32,7 @@ func (tn *TrieNode) Insert(data string) {
 	}
 
 	p.isEndingChar = true
-	strings.ToLower()
+	strings.ToLower(data)
 }
 
 func (tn *TrieNode) Find(pattern string) bool {

@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 func majorityElement(nums []int) int {
 	exist := make(map[int]int)
 	for _, v := range nums {

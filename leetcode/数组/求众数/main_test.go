@@ -1,5 +1,6 @@
 package main
 
+import "testing"
 
 func TestMajorityElement(t *testing.T) {
 	// a := []int{3, 2, 3}

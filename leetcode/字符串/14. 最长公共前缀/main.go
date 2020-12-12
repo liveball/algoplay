@@ -1,6 +1,11 @@
 package main
 
-func main(){}
+import (
+	"math"
+	"strings"
+)
+
+func main() {}
 
 func longestCommonPrefix(strs []string) string {
 	n := len(strs)

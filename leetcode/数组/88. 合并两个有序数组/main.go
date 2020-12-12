@@ -1,5 +1,12 @@
 package main
 
+import (
+	"fmt"
+	"reflect"
+	"sort"
+	"unsafe"
+)
+
 func merge(nums1 []int, m int, nums2 []int, n int) {
 	// i := m - 1
 	// j := n - 1
@@ -34,7 +41,7 @@ func merge(nums1 []int, m int, nums2 []int, n int) {
 	}
 	nums1 = append(nums1[:], nums2...)
 
-	fmt.Printf("222%#v\n", (*reflect.SliceHeader)(unsafe.Pointer(&nums1)))
+	fmt.Printf("222 %#v\n", (*reflect.SliceHeader)(unsafe.Pointer(&nums1)))
 
 	for i := 0; i < len(nums1)-1; i++ {
 		for j := 0; j < len(nums1)-i-1; j++ {

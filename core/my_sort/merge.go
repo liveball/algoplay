@@ -1,4 +1,4 @@
-package my_sort
+package main
 
 //归并排序思想：
 //merge_sort(p…r) 表示，给下标从 p 到 r 之间的数组排序。我们将这个排序问题转化为了两个子问题，

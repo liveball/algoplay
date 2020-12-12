@@ -1,9 +1,11 @@
 package main
 
-func main(){}
+import "strings"
+
+func main() {}
 
 func isPalindrome(s string) bool {
-    // 空是有效的回文
+	// 空是有效的回文
 	if s == "" {
 		return true
 	}
@@ -20,18 +22,18 @@ func isPalindrome(s string) bool {
 	// 得到结果
 	s = build.String()
 
-    i:=0
-    j:=len(s)-1
+	i := 0
+	j := len(s) - 1
 
-    for i<j {
-        if s[i]!=s[j]{
-            return false
-        }
-        i++
-        j--
-    }
+	for i < j {
+		if s[i] != s[j] {
+			return false
+		}
+		i++
+		j--
+	}
 
-    return true
+	return true
 }
 
 func palindrome(s string) bool {

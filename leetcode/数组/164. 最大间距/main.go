@@ -1,11 +1,55 @@
 package main
 
-func main()  {
-	
+func main() {
+
 }
 
-func maximumGap(nums []int) int {
+// 方法一：基数排序
+// 思路与算法
 
+// 一种最简单的思路是将数组排序后再找出最大间距，但传统的基于比较的排序算法（快速排序、归并排序等）
+// 均需要 O(N\log N)O(NlogN) 的时间复杂度。我们必须使用其他的排序算法。
+// 例如，基数排序可以在 O(N)O(N) 的时间内完成整数之间的排序。
+
+func maximumGap(nums []int) (ans int) {
+	n := len(nums)
+	if n < 2 {
+		return
+	}
+
+	buf := make([]int, n)
+	maxVal := max(nums...)
+	for exp := 1; exp <= maxVal; exp *= 10 {
+		cnt := [10]int{}
+		for _, v := range nums {
+			digit := v / exp % 10
+			cnt[digit]++
+		}
+		for i := 1; i < 10; i++ {
+			cnt[i] += cnt[i-1]
+		}
+		for i := n - 1; i >= 0; i-- {
+			digit := nums[i] / exp % 10
+			buf[cnt[digit]-1] = nums[i]
+			cnt[digit]--
+		}
+		copy(nums, buf)
+	}
+
+	for i := 1; i < n; i++ {
+		ans = max(ans, nums[i]-nums[i-1])
+	}
+	return
+}
+
+func max(a ...int) int {
+	res := a[0]
+	for _, v := range a[1:] {
+		if v > res {
+			res = v
+		}
+	}
+	return res
 }
 
 // 给定一个无序的数组，找出数组在排序之后，相邻元素之间最大的差值。

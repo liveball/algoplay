@@ -1,4 +1,0 @@
-{
-    "http.proxy": "https://goproxy.io,direct",
-    "http.proxyAuthorization": null
-}

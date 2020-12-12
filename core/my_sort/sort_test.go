@@ -1,4 +1,4 @@
-package my_sort
+package main
 
 import (
 	"fmt"

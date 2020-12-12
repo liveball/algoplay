@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 var (
 	strs = [][]string{
 		{"anagram", "nagaram"},
@@ -10,11 +12,9 @@ var (
 )
 
 func main() {
-	fmt.Println("get", getOnlyOneChar("aqabcdbdq"))
-
-	//for _, value := range strs {
-	//	fmt.Println(value[0], value[1], isAnagram3(value[0], value[1]))
-	//}
+	for _, value := range strs {
+		fmt.Println(value[0], value[1], isAnagram3(value[0], value[1]))
+	}
 }
 
 //hash 计数
@@ -49,7 +49,7 @@ func isAnagram(s string, t string) bool {
 func isAnagram2(s string, t string) bool {
 	if !(len(s) == len(t)) {
 		return false
-		
+
 	}
 
 	var (
@@ -91,7 +91,6 @@ func isAnagram3(s string, t string) bool {
 
 	return true
 }
-
 
 //题目是这样的：两个单词如果包含相同的字母，次序不同，则称为字母易位词(anagram)。
 // 例如，“silent”和“listen”是字母易位词，而“apple”和“aplee”不是易位词
