@@ -129,17 +129,18 @@ func RemoveMin(a []int, n int) {
 	minHeapify(a, 0, n)
 }
 
+//每个结点的值都小于或等于其左右孩子结点的值
 func minHeapify(a []int, i int, count int) { //a:数组，i:父节点位置，count:堆元素个数
 	var minPos int
 
 	for {
 		minPos = i
 
-		if 2*i < count && a[minPos] > a[2*i] {
+		if 2*i < count && a[minPos] < a[2*i] {
 			minPos = 2 * i
 		}
 
-		if 2*i+1 < count && a[minPos] > a[2*i+1] {
+		if 2*i+1 < count && a[minPos] < a[2*i+1] {
 			minPos = 2*i + 1
 		}
 
@@ -152,17 +153,19 @@ func minHeapify(a []int, i int, count int) { //a:数组，i:父节点位置，co
 	}
 }
 
+// 每个结点的值都大于或等于其左右孩子结点的值，我们把大顶堆构建完毕后根节点的值一定是最大的，
+// 然后把根节点的和最后一个元素（也可以说最后一个节点）交换位置，那么末尾元素此时就是最大元素了
 func maxHeapify(a []int, i int, count int) {
 	var maxPos int
 
 	for {
 		maxPos = i
 
-		if 2*i < count && a[maxPos] < a[2*i] {
+		if 2*i < count && a[maxPos] > a[2*i] {
 			maxPos = 2 * i
 		}
 
-		if 2*i+1 < count && a[maxPos] < a[2*i+1] {
+		if 2*i+1 < count && a[maxPos] > a[2*i+1] {
 			maxPos = 2*i + 1
 		}
 
