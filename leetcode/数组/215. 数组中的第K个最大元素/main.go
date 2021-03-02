@@ -17,17 +17,17 @@ func main() {
 // }
 
 func findKthLargest(nums []int, k int) int {
-	return quickSelect(nums, 0, len(nums)-1, len(nums)-k)
+	return quickSort(nums, 0, len(nums)-1, len(nums)-k)
 }
 
-func quickSelect(nums []int, l, r, k int) int {
+func quickSort(nums []int, l, r, k int) int {
 	p := partition(nums, l, r)
 	if p == k {
 		return nums[p]
 	} else if p < k { //在分区点右边
-		return quickSelect(nums, p+1, r, k)
+		return quickSort(nums, p+1, r, k)
 	} else { //在分区点左边
-		return quickSelect(nums, l, p-1, k)
+		return quickSort(nums, l, p-1, k)
 	}
 }
 
