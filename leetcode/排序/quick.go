@@ -14,10 +14,10 @@ func quickSortA(nums []int, l, r int) {
 		return
 	}
 
-	m := partition(nums, l, r)
+	p := partition(nums, l, r)
 
-	quickSortA(nums, l, m-1)
-	quickSortA(nums, m+1, r)
+	quickSortA(nums, l, p-1)
+	quickSortA(nums, p+1, r)
 
 }
 
