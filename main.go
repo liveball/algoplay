@@ -47,7 +47,8 @@ func testQuickSort() {
 	for _, tt := range tests {
 		// fmt.Println("before :", tt.args.list)
 
-		// sort.QuickSort(tt.args.list, tt.args.comparator)
+		old_sort.QuickSort(tt.args.list, tt.args.comparator)
+
 		old_sort.QuickSortConcurrent(tt.args.list, tt.args.comparator)
 
 		fmt.Println("after :", tt.args.list)
