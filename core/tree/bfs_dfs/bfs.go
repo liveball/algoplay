@@ -20,7 +20,7 @@ var nodes = map[int][]int{
 
 func main() {
 	visited := []int{}
-	bfs(1, nodes, func(node int) {
+	bfs(5, nodes, func(node int) {
 		visited = append(visited, node)
 	})
 	fmt.Println(visited)

@@ -38,7 +38,7 @@ func Test_heapSort(t *testing.T) {
 
 	fmt.Println("before sort", a)
 
-	HeapSort(a, len(a)-1)
+	HeapSort(a)
 
 	fmt.Println("after sort", a, isSorted(a))
 
@@ -49,7 +49,7 @@ func Test_RemoveMin(t *testing.T) {
 
 	fmt.Println("before build", a)
 
-	BuildHeap(a, len(a)-1)
+	BuildMinHeap(a, len(a)-1)
 
 	fmt.Println("after build", a)
 
