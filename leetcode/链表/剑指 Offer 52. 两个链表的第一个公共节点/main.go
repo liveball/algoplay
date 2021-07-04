@@ -13,6 +13,8 @@ type ListNode struct {
 	Next *ListNode
 }
 
+// 输入两个链表，找出它们的第一个公共节点。
+
 func getIntersectionNode(headA, headB *ListNode) *ListNode {
 	l1 := headA
 	l2 := headB
