@@ -10,13 +10,15 @@ func twoSum(nums []int, target int) []int {
 		return []int{}
 	}
 
-	targetMap := make(map[int]int)
+	vmap := make(map[int]int)
+
 	for k, v := range nums {
-		x := target - v
-		if k1, ok := targetMap[x]; ok {
+		v1 := target - v
+		if k1, ok := vmap[v1]; ok {
 			return []int{k1, k}
 		}
-		targetMap[v] = k
+
+		vmap[v] = k
 	}
 
 	return []int{}
