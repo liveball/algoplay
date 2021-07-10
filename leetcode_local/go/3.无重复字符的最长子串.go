@@ -10,23 +10,26 @@ func lengthOfLongestSubstring(s string) int {
 }
 
 func slidingWindow(s string) int {
-	window := make(map[rune]int)
-	left, right := 0, 0
-	size := len(s)
-
+	if len(s)==0{
+		return 0
+	}
+    
 	res := 0
-	for right < size {
-		c := rune(s[right])
-		right++
-		window[c]++
-
-		for window[c] > 1 { //判断左边窗口是否收缩
-			d := rune(s[left])
-			left++
-			window[d]--
+	left, right := 0, 0
+    var bitSet [256]uint8
+	for left< len(s){
+		//没有重复的字符，扩大右边界
+        if right<len(s) && bitSet[s[right]]==0{
+           bitSet[s[right]] = 1 //accii 标记已访问的边界
+		   right++
+		} else {//出现重复的字符
+			bitSet[s[left]] = 0//标记未访问的边界
+			left++ //缩小左边界，将重复字符移出左边界
 		}
+
 		res = max(res, right-left)
 	}
+
 
 	return res
 }

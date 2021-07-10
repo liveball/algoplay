@@ -12,33 +12,25 @@ func maxArea(height []int) int {
 
 	left, right := 0, len(height)-1
 	res := 0
-	for left <= right {
-		area := min(height[left], height[right]) * (right - left)
-		res = max(res, area)
-		if height[left] <= height[right] {
+	for left < right {
+		width:=right - left
+		high:=0
+		
+		if height[left] < height[right] {
+			high = height[left]
 			left++
 		} else {
+			high = height[right]
 			right--
+		}
+
+		area:=width*high
+		if area>res{
+           res=area
 		}
 	}
 
 	return res
-}
-
-func max(a, b int) int {
-	if a > b {
-		return a
-	}
-
-	return b
-}
-
-func min(a, b int) int {
-	if a < b {
-		return a
-	}
-
-	return b
 }
 
 // @lc code=end
