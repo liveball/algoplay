@@ -6,6 +6,11 @@
 
 // @lc code=start
 func lengthOfLIS(nums []int) int {
+	return lengthOfLISDP(nums)
+	// return lengthOfLIS1(nums)
+}
+
+func lengthOfLISDP(nums []int) int {
 	if len(nums) == 0 {
 		return 0
 	}
@@ -23,7 +28,6 @@ func lengthOfLIS(nums []int) int {
 
 		res = max(res, dp[i])
 	}
-
 	return res
 }
 
@@ -32,6 +36,21 @@ func max(a, b int) int {
 		return a
 	}
 	return b
+}
+
+// 解法二 O(n log n) DP  二分查找
+func lengthOfLIS1(nums []int) int {
+	dp := []int{}
+	for _, num := range nums {
+		i := sort.SearchInts(dp, num)
+		if i == len(dp) {
+			dp = append(dp, num)
+		} else {
+			dp[i] = num
+		}
+	}
+
+	return len(dp)
 }
 
 // @lc code=end

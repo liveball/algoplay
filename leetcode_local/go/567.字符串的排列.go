@@ -6,47 +6,43 @@
 
 // @lc code=start
 func checkInclusion(s1 string, s2 string) bool {
-	return slidingWindow(s1, s2)
-}
+    var freq [256]int
+	res:=false
 
-func slidingWindow(s1, s2 string) bool {
-	need, window := make(map[rune]int), make(map[rune]int)
-	left, right := 0, 0
-	size1, size2, valid := len(s1), len(s2), 0
-	for _, v := range s1 {
-		need[v]++
+	if len(s2)==0 || len(s2)<len(s1){
+		return res
 	}
 
-	for right < size2 {
-		c := rune(s2[right])
-		right++
+	//统计s1每个字母出现频次
+	for i:=0;i<len(s1);i++{
+		freq[s1[i]-'a']++
+	}
 
-		if _, ok := need[c]; ok { //向右滑动，递增窗口
-			window[c]++
-			if need[c] == window[c] {
-				valid++
-			}
+	left,right,count:=0,0,len(s1)
+
+	for right<len(s2){
+		//s2中第一个出现的字母，p总数减1
+		if freq[s2[right]-'a']>=1{
+			count--
+		}
+		freq[s2[right]-'a']--//出现频次减1
+		right++//继续右边滑动
+
+		if count==0{//左边界移出不符合规范的元素
+            res=true
 		}
 
-		for right-left >= size1 { //只要窗口内字符串长度大于s1长度
-			if valid == len(need) {
-				return true
+		//判断每个字母是否都被访问过一遍了
+		if right-left==len(s1){
+			if freq[s2[left]-'a']>=0{
+				count++
 			}
-
-			d := rune(s2[left])
+			freq[s2[left]-'a']++
 			left++
-
-			if _, ok := need[d]; ok {
-				if need[d] == window[d] {
-					valid--
-				}
-				window[d]--
-			}
 		}
 	}
 
-	return false
+	return res
 }
-
 // @lc code=end
 

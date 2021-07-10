@@ -6,48 +6,45 @@
 
 // @lc code=start
 func findAnagrams(s string, p string) []int {
-	return slidingWindow(p, s)
-}
+    var freq [256]int
+	res:=[]int{}
 
-func slidingWindow(s1, s2 string) []int {
-	need, window := make(map[rune]int), make(map[rune]int)
-	left, right := 0, 0
-	size1, size2, valid := len(s1), len(s2), 0
-	for _, v := range s1 {
-		need[v]++
+	if len(s)==0 || len(s)<len(p){
+		return res
 	}
 
-	res := make([]int, 0)
-	for right < size2 {
-		c := rune(s2[right])
-		right++
+	//统计p每个字母出现频次
+	for i:=0;i<len(p);i++{
+		freq[p[i]-'a']++
+	}
 
-		if _, ok := need[c]; ok { //向右滑动，递增窗口
-			window[c]++
-			if need[c] == window[c] {
-				valid++
-			}
+	left,right,count:=0,0,len(p)
+
+	for right<len(s){
+		//s中第一个出现的字母，p总数减1
+		if freq[s[right]-'a']>=1{
+			count--
+		}
+		freq[s[right]-'a']--//出现频次减1
+		right++//继续右边滑动
+
+		if count==0{//左边界移出不符合规范的元素
+            res=append(res, left)
 		}
 
-		for right-left >= size1 { //只要窗口内字符串长度大于s1长度
-			if valid == len(need) {
-				res = append(res, left)
+		//判断每个字母是否都被访问过一遍了
+		if right-left==len(p){
+			if freq[s[left]-'a']>=0{
+				count++
 			}
-
-			d := rune(s2[left])
+			freq[s[left]-'a']++
 			left++
-
-			if _, ok := need[d]; ok {
-				if need[d] == window[d] {
-					valid--
-				}
-				window[d]--
-			}
 		}
+
 	}
 
 	return res
-}
 
+}
 // @lc code=end
 

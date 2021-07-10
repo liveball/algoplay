@@ -6,75 +6,52 @@
 
 // @lc code=start
 func minWindow(s string, t string) string {
-	return slidingWindow(s, t)
-}
-
-func slidingWindow(s string, t string) (res string) {
-	if s == "" {
-		res = ""
-		return
+    if s=="" || t==""{
+		return ""
 	}
 
-	need := make(map[rune]int)
-	window := make(map[rune]int)
-	for _, v := range t {
-		need[v]++
-		// fmt.Println(k, v)
+	var sFreq,tFreq [256]int
+	res:=""
+	left:=0
+	right:=-1
+	finalLeft:=-1
+	finalRight:=-1
+	minW:=len(s)+1
+	count:=0
+
+	for i:=0;i<len(t);i++{
+		tFreq[t[i]-'a']++
 	}
 
-	left, right := 0, 0
-	valid, start := 0, 0
-	length := MAXInt
-
-	for right < len(s) {
-		//将字符c移入窗口
-		c := rune(s[right])
-		right++
-
-		if _, ok := need[c]; ok {
-			window[c]++
-
-			if need[c] == window[c] {
-				valid++
+	for left < len(s){
+		if right+1<len(s) && count<len(t){
+			sFreq[s[right+1]-'a']++
+			if sFreq[s[right+1]-'a']<=tFreq[s[right+1]-'a']{
+				count++
 			}
-		}
-
-		//已经找到所有目标字符，可以缩小窗口
-		for valid == len(need) {
-			//更新最小串
-			if right-left < length {
-				start = left
-				length = right - left
+			right++
+		} else {
+			if right-left+1<minW  && count==len(t){
+				minW=right-left+1
+				finalLeft=left
+				finalRight=right
 			}
 
-			//将字符d移出窗口
-			d := rune(s[left])
+			if sFreq[s[left]-'a']==tFreq[s[left]-'a']{
+				count--
+			}
+			sFreq[s[left]-'a']--
 			left++
-
-			if _, ok := need[d]; ok {
-				// fmt.Println(22, left, right, start, length, string(d))
-
-				if need[d] == window[d] {
-					valid--
-				}
-				window[d]--
-			}
 		}
-
 	}
 
-	// fmt.Println(111, left, right, start, length)
-	if length == MAXInt {
-		res = ""
-	} else {
-		res = s[start:][0:length] //注意字符串截取
+	if finalLeft!=-1 {
+		for i:=finalLeft;i<finalRight+1;i++{
+			res+=string(s[i])
+		}
 	}
-	return
+
+	return res
 }
-
-const (
-	MAXInt = 1 << 31
-)
-
 // @lc code=end
 
