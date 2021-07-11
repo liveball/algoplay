@@ -5,10 +5,28 @@
  */
 // @lc code=start
 func maxProfit(prices []int) int {
-
-	return getMax(prices)
+	// return getMax(prices)
 
 	// return getMax2(prices)
+
+	return maxProfitDP(prices)
+}
+
+// 解法一 模拟 DP
+func maxProfitDP(prices []int) int {
+	if len(prices) < 1 {
+		return 0
+	}
+	min, maxProfit := prices[0], 0
+	for i := 1; i < len(prices); i++ {
+		if prices[i]-min > maxProfit {
+			maxProfit = prices[i] - min
+		}
+		if prices[i] < min {
+			min = prices[i]
+		}
+	}
+	return maxProfit
 }
 
 const (
