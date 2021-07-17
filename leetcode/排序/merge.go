@@ -1,4 +1,4 @@
-package sort
+package test
 
 func mergeSort(a []int) {
 	mergeSortA(a, 0, len(a)-1)

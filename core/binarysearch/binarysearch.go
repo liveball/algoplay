@@ -4,12 +4,12 @@ import "fmt"
 
 var (
 	tests = map[int][]int{
-		3: []int{2, 4, 5, 6, 9},
-		1: []int{0, 1, 1, 1, 1},
+		3: {2, 4, 5, 6, 9},
+		1: {0, 1, 1, 1, 1},
 	}
 )
 
-func main() {
+func BinarySearchFirstGreaterTargetTest() {
 	for k, v := range tests {
 		res := BinarySearchFirstGreaterTarget(v, k)
 		fmt.Println(k, v, res)

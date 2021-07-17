@@ -59,10 +59,10 @@ func merge(a []int, p, q, r int) {
 		k++
 	}
 
-	//判断哪个子数组中有剩余数据
+	//判断哪个子数组中有剩余数据，必定二选一，i-q 区间或者j-r区间，只能有一个区间有剩余
 	start := i
 	end := q
-	if j <= r {
+	if j <= r { //j-r区间有剩余则覆盖假设的i-q区间
 		start = j
 		end = r
 	}

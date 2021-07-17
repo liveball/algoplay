@@ -6,18 +6,18 @@
 
 // @lc code=start
 func permute(nums []int) [][]int {
-	l:=len(nums)
-	res := make([][]int,0)
-	if l==0{
+	l := len(nums)
+	res := make([][]int, 0)
+	if l == 0 {
 		return res
 	}
 
-	path := []int{}		// path跟visited是全过程共享的，一定要注意恢复状态
-	visited:=make(map[int]bool)
+	path := []int{} // path跟visited是全过程共享的，一定要注意恢复状态
+	visited := make(map[int]bool)
 	dfs(nums, l, 0, path, visited, &res)
 	return res
 
-    // return permuteRecursion(nums)//递归
+	// return permuteRecursion(nums)//递归
 }
 
 // 遍历决策树中所有可行路径，并保存结果。
@@ -27,25 +27,23 @@ func permute(nums []int) [][]int {
 // 修改状态->递归调用->调用返回，调用返回后要恢复状态，保证每一层的不同决策分支的初始状态不变
 // 另一种做法是在每次递归调用时就传递一份当前状态的拷贝
 
-
-func dfs(nums []int,l int, depth int, path []int, visited map[int]bool, res *[][]int) {
-	if depth==l{
+func dfs(nums []int, l int, depth int, path []int, visited map[int]bool, res *[][]int) {
+	if depth == l {
 		// 保存path当前快照，因为path是共享的，后续会被其他决策修改
-		// *res = append(*res, append([]int(nil), path...))//方法一
+		*res = append(*res, append([]int(nil), path...)) //方法一
 
-		*res = append(*res,  path)//方法二
-		return 
+		// *res = append(*res, path) //方法二
+		return
 	}
 
-	for _, num := range nums {
-		if !visited[num] {
-			visited[num] = true			// 更改当前状态，递归调用下一层
+	for i, num := range nums {
+		if !visited[i] {
+			visited[i] = true // 更改当前状态，递归调用下一层
 
 			//方法一
-			// path = append(path, num)
-			// dfs(nums,l, depth+1, path, visited, res)
-			// path = path[:len(path)-1]   //撤销当前已使用节点
-
+			path = append(path, num)
+			dfs(nums, l, depth+1, path, visited, res)
+			path = path[:len(path)-1] //撤销当前已使用节点
 
 			// 方法二中，因为每次递归调用传的都是新slice，path本身是不会被修改的，
 			// 只是在初始path的基础上每一层调用添加新元素。
@@ -58,8 +56,9 @@ func dfs(nums []int,l int, depth int, path []int, visited map[int]bool, res *[][
 			// 因此不可能发生一个叶子的path被到达另一个叶子的过程中被修改的情况，
 			// result保存时可以直接保存局部变量path。
 
-			dfs(nums,l, depth+1, append(path, num), visited, res)
-			visited[num] = false		// 每次返回后恢复状态，供下一回合使用
+			// dfs(nums, l, depth+1, append(path, num), visited, res)
+
+			visited[i] = false // 每次返回后恢复状态，供下一回合使用
 		}
 	}
 }

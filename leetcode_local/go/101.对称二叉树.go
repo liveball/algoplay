@@ -14,7 +14,7 @@
  * }
  */
 func isSymmetric(root *TreeNode) bool {
-	// 将根节点的左字数反转二叉树，然后再和根节点的右节点进行比较，是 否完全相等。
+	// 将根节点的左子数反转二叉树，然后再和根节点的右节点进行比较，是 否完全相等。
 	return isSameTree(invertTree(root.Left), root.Right)
 }
 

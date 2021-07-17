@@ -1,4 +1,4 @@
-package _00_最长上升子序列
+package test
 
 import (
 	"fmt"

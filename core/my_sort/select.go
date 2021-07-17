@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-func main() {
+func selectSortTest() {
 	arr := []int{3, 1, 2, 4}
 
 	selectSort(arr)

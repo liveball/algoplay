@@ -30,7 +30,7 @@ func QuickSort(a []int) {
 		return
 	}
 
-	quickSort(a, 0, n-1)
+	partition2(a, 0, n-1)
 }
 
 func quickSort(a []int, p, r int) {
@@ -43,7 +43,7 @@ func quickSort(a []int, p, r int) {
 	quickSort(a, q+1, r)
 }
 
-func partition(a []int, p, r int) int {
+func partition2(a []int, p, r int) int {
 	// 选取最后一位当对比数字
 	pivot := a[r]
 

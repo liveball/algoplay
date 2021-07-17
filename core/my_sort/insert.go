@@ -2,6 +2,14 @@ package main
 
 import "fmt"
 
+func insertSortTest() {
+	arr := []int{3, 1, 2, 4}
+
+	insertSort(arr)
+
+	fmt.Println(arr)
+}
+
 func insertSort(arr []int) {
 	if len(arr) == 0 {
 		return
@@ -20,12 +28,4 @@ func insertSort(arr []int) {
 
 		arr[j+1] = temp
 	}
-}
-
-func main() {
-	arr := []int{3, 1, 2, 4}
-
-	insertSort(arr)
-
-	fmt.Println(arr)
 }

@@ -1,11 +1,11 @@
-package main
+package heap
 
 import (
 	"fmt"
 	"sync"
 )
 
-func main() {
+func HeapSortByMinHeapTest() {
 	a := []int{2, 1, 3, 4, 6, 5}
 
 	fmt.Println("before sort:", a)
