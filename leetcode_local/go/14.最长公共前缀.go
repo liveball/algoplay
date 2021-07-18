@@ -1,43 +1,20 @@
-package main
+/*
+ * @lc app=leetcode.cn id=14 lang=golang
+ *
+ * [14] 最长公共前缀
+ */
 
-import (
-	"fmt"
-	"math"
-	"strings"
-	"testing"
-)
-
-func main() {}
-
-func Test_longestCommonPrefix(t *testing.T) {
-	tests := [][]string{
-		{
-			"flower",
-			"flow",
-			"flight",
-		},
-		{
-			"dog",
-			"racecar",
-			"car",
-		},
-	}
-
-	for _, v := range tests {
-		fmt.Println(longestCommonPrefix(v))
-	}
-}
-
+// @lc code=start
 func longestCommonPrefix(strs []string) string {
 	n := len(strs)
-	// 输入为空直接返回空
-	if n == 0 {
+
+	if n == 0 { // 输入为空直接返回空
 		return ""
-		// 只输入一个字符串那么它自己就是最长公共后缀
-	} else if n == 1 {
+
+	} else if n == 1 { // 只输入一个字符串那么它自己就是最长公共后缀
 		return strs[0]
-		// 如果基准字符串是空，那么直接返回空
-	} else if len(strs[0]) == 0 {
+
+	} else if len(strs[0]) == 0 { // 如果基准字符串是空，那么直接返回空
 		return ""
 	}
 
@@ -76,23 +53,5 @@ func longestCommonPrefix(strs []string) string {
 	return prefix
 }
 
-// 编写一个函数来查找字符串数组中的最长公共前缀。
+// @lc code=end
 
-// 如果不存在公共前缀，返回空字符串 ""。
-
-// 示例 1:
-
-// 输入: ["flower","flow","flight"]
-// 输出: "fl"
-// 示例 2:
-
-// 输入: ["dog","racecar","car"]
-// 输出: ""
-// 解释: 输入不存在公共前缀。
-// 说明:
-
-// 所有输入只包含小写字母 a-z 。
-
-// 来源：力扣（LeetCode）
-// 链接：https://leetcode-cn.com/problems/longest-common-prefix
-// 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。

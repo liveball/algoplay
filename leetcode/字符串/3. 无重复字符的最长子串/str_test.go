@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"math"
 	"strings"
 	"testing"
 )
@@ -26,25 +25,6 @@ func Test_lengthOfLongestSubstring(t *testing.T) { //无重复字符的最长子
 	//for _, v := range tests {
 	//	fmt.Println(lengthOfLongestSubstring3(v))
 	//}
-}
-
-func Test_longestCommonPrefix(t *testing.T) {
-	tests := [][]string{
-		{
-			"flower",
-			"flow",
-			"flight",
-		},
-		{
-			"dog",
-			"racecar",
-			"car",
-		},
-	}
-
-	for _, v := range tests {
-		fmt.Println(longestCommonPrefix(v))
-	}
 }
 
 func lengthOfLongestSubstring(s string) int {
@@ -139,7 +119,6 @@ func lengthOfLongestSubstring3(s string) int {
 	return max(window, len(s)-start)
 }
 
-
 //给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度。
 //
 //示例 1:
@@ -167,4 +146,3 @@ func lengthOfLongestSubstring3(s string) int {
 
 //以此类推，不断的刷新记录的窗口大小。
 //最终最大的值就是题目中的所求。
-
