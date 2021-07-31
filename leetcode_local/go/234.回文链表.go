@@ -34,6 +34,8 @@ func isPalindrome(head *ListNode) bool {
 		cur = next
 	}
 
+	// fmt.Println(head, pre, cur)
+
 	thead, mid := head, pre
 	for thead != nil && mid != nil {
 		if thead.Val != mid.Val {
