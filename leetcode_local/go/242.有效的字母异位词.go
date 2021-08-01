@@ -6,9 +6,36 @@
 
 // @lc code=start
 func isAnagram(s string, t string) bool {
+	return isAnagram0(s, t)
+
 	// return isAnagram1(s, t)
 	// return isAnagram2(s, t)
-	return isAnagram3(s, t)
+	// return isAnagram3(s, t)
+}
+
+//排序
+func isAnagram0(s string, t string) bool {
+	s1 := []rune(s)
+	sort.Stable(sortRunes(s1))
+
+	t1 := []rune(t)
+	sort.Stable(sortRunes(t1))
+
+	return string(s1) == string(t1)
+}
+
+type sortRunes []rune
+
+func (s sortRunes) Less(i, j int) bool {
+	return s[i] < s[j]
+}
+
+func (s sortRunes) Swap(i, j int) {
+	s[i], s[j] = s[j], s[i]
+}
+
+func (s sortRunes) Len() int {
+	return len(s)
 }
 
 //hash 计数
