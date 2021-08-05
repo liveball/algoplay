@@ -23,17 +23,21 @@ func maxSlidingWindow2(nums []int, k int) []int {
 	res := make([]int, 0, n-k+1)
 
 	for i, v := range nums {
-		if i >= k && window[0] <= i-k { //有元素超越窗口左边界，则移出
+		if i >= k && window[0] <= i-k { //有元素超越窗口左边界，则移出，窗口右移
+			fmt.Println(333, i, i-k, window[0], v, window) //4 1 1 5 [1 2 3]
 			window = window[1:len(window)]
 		}
 
 		//如果窗口不空，依次循环窗口里面元素，如果比当前元素小则滑出窗口
 		for len(window) > 0 && nums[window[len(window)-1]] < v { //O(1)
+			fmt.Println(222, i, v, window)
 			window = window[:len(window)-1]
 		}
 
 		//加入窗口
 		window = append(window, i)
+
+		fmt.Println(111, i, v, window)
 
 		//如果当前索引大于窗口左边界，则取窗口最左边的元素
 		if i >= k-1 {

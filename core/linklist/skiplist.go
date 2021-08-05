@@ -25,7 +25,12 @@ type skipListNode struct {
 
 //新建跳表节点
 func newSkipListNode(v interface{}, score, level int) *skipListNode {
-	return &skipListNode{v: v, score: score, forwards: make([]*skipListNode, level, level), level: level}
+	return &skipListNode{
+		v: v,
+		score: score,
+		forwards: make([]*skipListNode, level, level),
+		level:    level,
+	}
 }
 
 //跳表结构体
@@ -41,7 +46,10 @@ type SkipList struct {
 //实例化跳表对象
 func NewSkipList() *SkipList {
 	//头结点，便于操作
-	head := newSkipListNode(0, math.MinInt32, MAX_LEVEL)
+	head := newSkipListNode(
+		0,
+		math.MinInt32,
+		MAX_LEVEL)
 	return &SkipList{head, 1, 0}
 }
 
