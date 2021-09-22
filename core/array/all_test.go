@@ -1,6 +1,28 @@
 package array
 
-import "testing"
+import (
+	"fmt"
+	"testing"
+)
+
+var score = []int{1, 1, -1, -1, -1, -1, 1}
+
+func Test_qianzhuihe(t *testing.T) {
+	fmt.Println("-----------")
+
+	fmt.Println(10 & 7) //=2
+	fmt.Println(^(2 ^ 7))
+
+	fmt.Println("-----------")
+
+	presum := make([]int, len(score)+1)
+	for i := 0; i < len(score); i++ {
+		presum[i+1] = score[i] + presum[i]
+	}
+
+	fmt.Println(presum)
+	// [0 1 2 1 0 -1 -2 -1]
+}
 
 func TestSliceDel(t *testing.T) {
 	sliceDel([]string{"a", "b", "c"}, "c")
