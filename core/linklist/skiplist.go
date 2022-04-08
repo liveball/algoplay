@@ -26,8 +26,8 @@ type skipListNode struct {
 //新建跳表节点
 func newSkipListNode(v interface{}, score, level int) *skipListNode {
 	return &skipListNode{
-		v: v,
-		score: score,
+		v:        v,
+		score:    score,
 		forwards: make([]*skipListNode, level, level),
 		level:    level,
 	}
@@ -74,17 +74,24 @@ func (sl *SkipList) Insert(v interface{}, score int) int {
 	//记录每层的路径
 	update := [MAX_LEVEL]*skipListNode{}
 	i := MAX_LEVEL - 1
-	for ; i >= 0; i-- {
-		for nil != cur.forwards[i] {
-			if cur.forwards[i].v == v {
+	for ; i >= 0; i-- { //循环每一层
+		for nil != cur.forwards[i] { //循环每一层的头节点
+			if cur.forwards[i].v == v { //值存在则返回2
 				return 2
 			}
+
+			//如果当前节点分值大于传进去的分值，则记录该层级要更新的节点为当前节点
+			//并且跳出当前层级的循环
 			if cur.forwards[i].score > score {
 				update[i] = cur
 				break
 			}
+
+			//前进当前遍历的节点
 			cur = cur.forwards[i]
 		}
+
+		//如果当前层级节点的前进节点为nil，则记录要更新的节点为当前节点
 		if nil == cur.forwards[i] {
 			update[i] = cur
 		}

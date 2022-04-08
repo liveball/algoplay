@@ -7,6 +7,16 @@ import (
 	"time"
 )
 
+func Test_SearchByStd(t *testing.T) {
+	arr := []int{1, 3, 5, 7}
+	index := SearchByStd(len(arr), func(i int) bool {
+		// return arr[i] == 3
+		return arr[i] >= 3
+	})
+
+	fmt.Println(index)
+}
+
 func Test_binarySearch(t *testing.T) {
 	//c := func(i int) bool { return data[i] > 9 }
 	//i := sort.Search(len(data)-1, c)
