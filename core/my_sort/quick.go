@@ -1,7 +1,5 @@
 package main
 
-import "fmt"
-
 //快排的思想是这样的：如果要排序数组中下标从 p 到 r 之间的一组数据，
 //我们选择 p 到 r 之间的任意一个数据作为 pivot（分区点）。
 //我们遍历 p 到 r 之间的数据，将小于 pivot 的放到左边，
@@ -30,39 +28,37 @@ func QuickSort(a []int) {
 		return
 	}
 
-	partition2(a, 0, n-1)
+	quickSort(a, 0, n-1)
 }
 
-func quickSort(a []int, p, r int) {
-	if p >= r {
+func quickSort(a []int, l, r int) {
+	if l >= r {
 		return
 	}
 
-	q := partition(a, p, r)
-	quickSort(a, p, q-1)
-	quickSort(a, q+1, r)
+	p := partition(a, l, r)
+	quickSort(a, l, p-1)
+	quickSort(a, p+1, r)
 }
 
-func partition2(a []int, p, r int) int {
+func partition(a []int, l, r int) int {
 	// 选取最后一位当对比数字
-	pivot := a[r]
+	pivot := l
+	index := pivot + 1
 
-	i := p
-
-	fmt.Println("pivot", pivot, i, r)
-	for j := p; j < r; j++ {
-		fmt.Println("before exchange by pivot", a)
-		if a[j] < pivot {
-			a[i], a[j] = a[j], a[i]
-			i++
+	for i := index; i <= r; i++ {
+		// fmt.Println("before exchange by pivot", pivot, a)
+		if a[i] < a[pivot] {
+			a[i], a[index] = a[index], a[i]
+			index++
 		}
-		fmt.Println("after exchange by pivot", a)
+		// fmt.Println("after exchange by pivot", pivot, a)
 	}
 
-	a[i], a[r] = a[r], a[i]
+	a[pivot], a[index-1] = a[index-1], a[pivot]
 
-	fmt.Println("pivot", i, a)
-	return i
+	// fmt.Println("pivot---index", pivot, index)
+	return index - 1
 }
 
 //partition() 分区函数实际上我们前面已经讲过了，

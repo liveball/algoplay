@@ -17,12 +17,12 @@ func qsort(arr []int, l, r int) {
 		return
 	}
 
-	p := partition(arr, l, r)
+	p := partition2(arr, l, r)
 	qsort(arr, l, p-1)
 	qsort(arr, p+1, r)
 }
 
-func partition(arr []int, l, r int) int {
+func partition2(arr []int, l, r int) int {
 	i := l      //标记分割位置
 	v := arr[l] //记录比较值
 	//从分割位置右边的第一个元素开始比较

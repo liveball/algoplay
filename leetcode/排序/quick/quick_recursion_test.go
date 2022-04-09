@@ -20,49 +20,47 @@ func Test_qsort2(t *testing.T) {
 	t.Log(nums)
 }
 
-
-
 //递归方式
 func qsort(arr []int, left, right int) {
-	if len(arr)==0 || left<0 || right<=0|| left>=right{
-		return 
+	if len(arr) == 0 || left < 0 || right <= 0 || left >= right {
+		return
 	}
 
-	k:=partition(arr, left, right)
-	if k>left{
+	k := partition(arr, left, right)
+	if k > left {
 		qsort(arr, left, k-1)
 	}
 
-	if k<right{
+	if k < right {
 		qsort(arr, k+1, right)
 	}
 }
 
 //非递归方式
 func qsort2(arr []int, left, right int) {
-	if len(arr)==0 || left<0 || right<=0|| left>=right{
-		return 
+	if len(arr) == 0 || left < 0 || right <= 0 || left >= right {
+		return
 	}
 
-	stack:=make([]int, 0, len(arr))
+	stack := make([]int, 0, len(arr))
 	//（注意保存顺序）先将初始状态的左右指针压栈
-	stack = append(stack, right)//先存右指针
-	stack = append(stack, left)//再存左指针
-	for len(stack)!=0 {
-		i:=stack[len(stack)-1]//先弹出左指针
-		stack=stack[:len(stack)-1]
-		j:= stack[len(stack)-1] //再弹出右指针
-		stack=stack[:len(stack)-1]
+	stack = append(stack, right) //先存右指针
+	stack = append(stack, left)  //再存左指针
+	for len(stack) != 0 {
+		i := stack[len(stack)-1] //先弹出左指针
+		stack = stack[:len(stack)-1]
+		j := stack[len(stack)-1] //再弹出右指针
+		stack = stack[:len(stack)-1]
 
-		if i<j{
-			k:=partition(arr, i, j)
-			if k>i{
-				stack= append(stack, k-1)//保存中间变量
-				stack= append(stack, i)//保存中间变量
+		if i < j {
+			k := partition(arr, i, j)
+			if k > i {
+				stack = append(stack, k-1) //保存中间变量
+				stack = append(stack, i)   //保存中间变量
 			}
-			if j>k{
-				stack= append(stack, j)//保存中间变量
-				stack= append(stack, k+1)//保存中间变量
+			if j > k {
+				stack = append(stack, j)   //保存中间变量
+				stack = append(stack, k+1) //保存中间变量
 			}
 		}
 	}
