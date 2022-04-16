@@ -1,6 +1,11 @@
 package main
 
-func main(){}
+import "fmt"
+
+func main() {
+	a := reverse(1234567)
+	fmt.Println(a)
+}
 
 const (
 	max = int(^uint32(0) >> 1)
@@ -11,8 +16,12 @@ func reverse(x int) int {
 	var res int
 
 	for x != 0 {
+		fmt.Println("before----", res, res*10, x, x%10)
+
 		res = res*10 + x%10
 		x /= 10
+
+		fmt.Println("after----", res, x)
 
 		if res < min || res > max {
 			return 0

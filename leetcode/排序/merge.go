@@ -20,7 +20,8 @@ func mergeSortA(a []int, p int, r int) {
 }
 
 func merge(a []int, p, q, r int) {
-	i, j, k := p, q+1, 0
+	i, j := p, q+1
+	k := 0
 	tmp := make([]int, r-p+1)
 
 	for i <= q && j <= r {

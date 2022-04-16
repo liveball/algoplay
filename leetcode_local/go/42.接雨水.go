@@ -6,10 +6,10 @@
 
 // @lc code=start
 func trap(height []int) int {
-	// return trap1(height) //精简双指针
+	return trap1(height) //精简双指针
 	// return trap2(height) //繁琐双指针
 	// return trap3(height) //动态规划
-	return trap4(height) //单调栈
+	// return trap4(height) //单调栈
 }
 
 func trap1(height []int) int {
